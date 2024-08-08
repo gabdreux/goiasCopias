@@ -1,0 +1,32 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "Produtos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "Id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Data_Criacao",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Pedidos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "Id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Data_Criacao",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
+}

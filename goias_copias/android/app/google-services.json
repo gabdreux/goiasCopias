@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "408216495405",
+    "project_id": "printz-6kass7",
+    "storage_bucket": "printz-6kass7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408216495405:android:c816a2e163411f2f7d5fa4",
+        "android_client_info": {
+          "package_name": "com.mycompany.goiascopias"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_7rESBblJM7w33855iXtHtmCckeNtQCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408216495405:android:99ced369032ed54d7d5fa4",
+        "android_client_info": {
+          "package_name": "com.mycompany.monitor13"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_7rESBblJM7w33855iXtHtmCckeNtQCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

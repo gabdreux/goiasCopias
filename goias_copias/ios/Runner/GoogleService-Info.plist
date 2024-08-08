@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDWhN-gzcOytW0kE4Jt-Y_HBb8Vg0JRZHw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>408216495405</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mycompany.goiascopias</string>
+	<key>PROJECT_ID</key>
+	<string>printz-6kass7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>printz-6kass7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:408216495405:ios:b4ecf30951a7955e7d5fa4</string>
+</dict>
+</plist>
