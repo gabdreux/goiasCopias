@@ -313,36 +313,32 @@ class CalculadoraDeFreteCall {
   static Future<ApiCallResponse> call({
     String? accessToken =
         'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNWQzNjUxNmEyN2MzNTAxZGU4ZjdiMmJjNGYxMmNhZGYwNzI3MGIyZWY3ODMzODkzOTE3ZjlhMjNhZTUwMWM3MDc2ZGM4Zjg4NmViN2Q4ZTMiLCJpYXQiOjE3MjMwNzQ0ODMuMDIyMTgxLCJuYmYiOjE3MjMwNzQ0ODMuMDIyMTg1LCJleHAiOjE3NTQ2MTA0ODMuMDAxODAxLCJzdWIiOiIzNDg5ZThmNS0zMjY3LTRmM2MtOTQ5Yy0xZDZlZTVlNmU2YTIiLCJzY29wZXMiOlsic2hpcHBpbmctY2FsY3VsYXRlIl19.cnitIAA99uTxFMHq2WqwwyDHbf9NbkQrFOPjLJhw5_wJ2PLeZ352OkYRh8Ll6ExQPZqTqbJpaUpFaTkr-FTwXAjmv5aIrsB-H2esRciNbn7p8DuhOvM7Dno0l4w6gBT29q2YfBaTEo_w1TqrAqBWNMkWnnyy3u8Duh5j7qWqV3t-nb2YjLG6E3ReFDLUCveqDR5g7_ZEBsdHvdzkwSdy5SlwEnOOSJh9LhWlSErMli3AHUAQ2AZw65hI5QUlSPmP-TZ8UZlzdJ5rGrXomYYm6NFrFao8ySzeb8VJ64SzFsgWXg08cTcWIQDFJkR_ZYIC-I-4Wr9RzJ5QqGCRyuvrjRUBmY9vYAopPOb7vVjHzZOXWvZPqZI3AoICzUYY8T2S5ef3AuFby63JvLLYtsPxoC36AMYxeMmYf0h2Mrnlz8fHOC0lSuhD9iF84-LSqtaatnbhbCNbnXZ6cB7EWFYG2Wd355-Xuq107jqvQBSKwhvf1wB7d3fMT-CNeb8tXNazg4hjooDRXYa8HLK9Hmpq3WTYw-1LO04A3OWYhZaS2ovGsXNBW6zycjGpYCaV2zTl5CwRvGcw0WaXyi-Lp4bSGLsEzs6UAQsBlBYhntSYFS3pnOsSZs7kbaNepfWRntEZt_Hr7AGY-KxBsi4FK20KiYUUMkvwy__um2LpVEpFdTg',
-    String? cep = '',
+    String? cep,
     double? altura,
     double? largura,
     double? comprimento,
     double? peso,
   }) async {
+    // Define a URL do seu proxy local
+    final apiUrl = 'http://localhost:3000/proxy';
+
+    // Define o corpo da requisição
     final ffApiRequestBody = '''
 {
-  "from": {
-    "postal_code": "01002001"
-  },
-  "to": {
-    "postal_code": "${cep}"
-  },
-  "package": {
-    "height": ${altura},
-    "width": ${largura},
-    "length": ${comprimento},
-    "weight": ${peso}
-  }
+  "accessToken": "${accessToken}",
+  "cep": "${cep}",
+  "altura": ${altura},
+  "largura": ${largura},
+  "comprimento": ${comprimento},
+  "peso": ${peso}
 }''';
+
     return ApiManager.instance.makeApiCall(
       callName: 'Calculadora de Frete',
-      apiUrl: 'https://www.melhorenvio.com.br/api/v2/me/shipment/calculate',
+      apiUrl: apiUrl,
       callType: ApiCallType.POST,
       headers: {
-        'Aceept': 'application/json',
-        'Authorization': 'Bearer ${accessToken}',
         'Content-Type': 'application/json',
-        // 'User-Agent': 'Aplicação dev.dreux@gmail.com',
       },
       params: {},
       body: ffApiRequestBody,
