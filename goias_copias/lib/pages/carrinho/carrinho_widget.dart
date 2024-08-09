@@ -1732,10 +1732,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                                                   'Entrega: ${getJsonField(
                                                                                     fretesItem,
                                                                                     r'''$.delivery_range.max''',
-                                                                                  ).toString()}dias${getJsonField(
-                                                                                    fretesItem,
-                                                                                    r'''$.company.name''',
-                                                                                  ).toString()}',
+                                                                                  ).toString()}dias',
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         fontFamily: 'Inter',
                                                                                         letterSpacing: 0,

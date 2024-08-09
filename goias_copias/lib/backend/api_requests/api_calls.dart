@@ -28,7 +28,7 @@ class PixMercadoPagoCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "description": "${description}",
+  "description": "Descrição Produto",
   "transaction_amount": ${transactionAmount},
   "payment_method_id": "${paymentMethonId}",
   "payer": {
@@ -43,12 +43,12 @@ class PixMercadoPagoCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Pix Mercado Pago',
-      apiUrl: 'https://api.mercadopago.com/v1/payments',
+      apiUrl: 'https://goias-copias-proxy.vercel.app/proxy-mercado-pago-pix',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${accessToken}',
         'X-Idempotency-Key': '${stringrandomica}',
+        'Authorization': 'Bearer ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -139,7 +139,7 @@ class CardToTokenCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Card to Token',
       apiUrl:
-          'https://api.mercadopago.com/v1/card_tokens?public_key=${publicKey}',
+          'https://goias-copias-proxy.vercel.app/proxy-card-to-token?public_key=${publicKey}',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${accessToken}',
@@ -251,7 +251,7 @@ class CCMercadoPagoCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'CC Mercado Pago',
-      apiUrl: 'https://api.mercadopago.com/v1/payments',
+      apiUrl: 'https://goias-copias-proxy.vercel.app/proxy-mercado-pago-cc',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${accessToken}',
