@@ -3777,13 +3777,12 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    15.0,
-                                                                    0.0,
-                                                                    10.0),
+                                                                .fromSTEB(0, 15,
+                                                                    0, 10),
                                                         child: FFButtonWidget(
                                                           onPressed: () async {
+                                                            var _shouldSetState =
+                                                                false;
                                                             if (_model.formKey2
                                                                         .currentState ==
                                                                     null ||
@@ -3832,7 +3831,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     .textFieldCpfTextController
                                                                     .text,
                                                               );
-
+                                                              _shouldSetState =
+                                                                  true;
                                                               if ((_model.outPix
                                                                       ?.succeeded ??
                                                                   true)) {
@@ -3887,6 +3887,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     );
                                                                   },
                                                                 );
+                                                                if (_shouldSetState)
+                                                                  setState(
+                                                                      () {});
+                                                                return;
                                                               }
                                                             } else {
                                                               if (_model.formKey1
@@ -3952,7 +3956,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         .textFieldCpfTextController
                                                                         .text,
                                                               );
-
+                                                              _shouldSetState =
+                                                                  true;
                                                               if ((_model
                                                                       .tokenOUT
                                                                       ?.succeeded ??
@@ -4016,7 +4021,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     1,
                                                                   ),
                                                                 );
-
+                                                                _shouldSetState =
+                                                                    true;
                                                                 if ((_model
                                                                         .ccOUT
                                                                         ?.succeeded ??
@@ -4052,6 +4058,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                       );
                                                                     },
                                                                   );
+                                                                  if (_shouldSetState)
+                                                                    setState(
+                                                                        () {});
+                                                                  return;
                                                                 }
                                                               } else {
                                                                 await showDialog(
@@ -4075,9 +4085,12 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     );
                                                                   },
                                                                 );
+                                                                if (_shouldSetState)
+                                                                  setState(
+                                                                      () {});
+                                                                return;
                                                               }
                                                             }
-
                                                             if ((_model.ccOUT
                                                                         ?.succeeded ??
                                                                     true) ||
@@ -4183,6 +4196,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                   },
                                                                 ),
                                                               }, pedidosRecordReference);
+                                                              _shouldSetState =
+                                                                  true;
                                                               while (FFAppState()
                                                                       .CarrinhoState
                                                                       .produtos
@@ -4227,6 +4242,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                       .pdfsCarrinhoString
                                                                       .toList(),
                                                                 );
+                                                                _shouldSetState =
+                                                                    true;
                                                                 while (_model
                                                                         .pdfsToUploadCheckoutOUT!
                                                                         .length >
@@ -4293,7 +4310,6 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                       return;
                                                                     }
                                                                   }
-
                                                                   _model.addToPdfsURL(
                                                                       _model
                                                                           .uploadedFileUrl);
@@ -4305,7 +4321,6 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                   setState(
                                                                       () {});
                                                                 }
-
                                                                 var pedidoInfosRecordReference =
                                                                     PedidoInfosRecord.createDoc(_model
                                                                         .pedido!
@@ -4493,6 +4508,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     },
                                                                   ),
                                                                 }, pedidoInfosRecordReference);
+                                                                _shouldSetState =
+                                                                    true;
                                                                 _model.iterationCount =
                                                                     _model.iterationCount +
                                                                         1;
@@ -4507,193 +4524,198 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               _model.fireIterationCount =
                                                                   0;
                                                               setState(() {});
-                                                            }
-                                                            if (widget!
-                                                                .newuser) {
-                                                              await currentUserReference!
-                                                                  .update({
-                                                                ...createUsersRecordData(
-                                                                  phoneNumber:
-                                                                      _model
-                                                                          .textFieldTelefoneTextController
-                                                                          .text,
-                                                                  displayName:
-                                                                      _model
-                                                                          .textFieldNomeTextController
-                                                                          .text,
-                                                                  sobrenome: _model
+                                                              if (widget!
+                                                                  .newuser) {
+                                                                await currentUserReference!
+                                                                    .update({
+                                                                  ...createUsersRecordData(
+                                                                    phoneNumber:
+                                                                        _model
+                                                                            .textFieldTelefoneTextController
+                                                                            .text,
+                                                                    displayName:
+                                                                        _model
+                                                                            .textFieldNomeTextController
+                                                                            .text,
+                                                                    sobrenome: _model
+                                                                        .textFieldSobrenomeTextController
+                                                                        .text,
+                                                                    cpf: _model
+                                                                        .textFieldCpfTextController
+                                                                        .text,
+                                                                    cep: _model
+                                                                        .textFieldCepTextController
+                                                                        .text,
+                                                                    numero: int.tryParse(_model
+                                                                        .textFieldNumeroTextController
+                                                                        .text),
+                                                                    complemento:
+                                                                        _model
+                                                                            .textFieldComlementoTextController
+                                                                            .text,
+                                                                    endereco: _model
+                                                                        .textFieldEnderecoTextController
+                                                                        .text,
+                                                                    bairro: _model
+                                                                        .textFieldBairroTextController
+                                                                        .text,
+                                                                    cidade: _model
+                                                                        .textFieldCidadeTextController
+                                                                        .text,
+                                                                    estado: _model
+                                                                        .textFieldEstadoTextController
+                                                                        .text,
+                                                                  ),
+                                                                  ...mapToFirestore(
+                                                                    {
+                                                                      'Pedidos':
+                                                                          FieldValue
+                                                                              .arrayUnion([
+                                                                        _model
+                                                                            .idPedido
+                                                                      ]),
+                                                                    },
+                                                                  ),
+                                                                });
+                                                              }
+                                                              if (currentUserEmail ==
+                                                                      null ||
+                                                                  currentUserEmail ==
+                                                                      '') {
+                                                                _model.registroCheckout =
+                                                                    await actions
+                                                                        .createNewUser(
+                                                                  _model
+                                                                      .textFieldEmailTextController
+                                                                      .text,
+                                                                  random_data
+                                                                      .randomString(
+                                                                    8,
+                                                                    8,
+                                                                    true,
+                                                                    true,
+                                                                    true,
+                                                                  ),
+                                                                  _model
+                                                                      .textFieldTelefoneTextController
+                                                                      .text,
+                                                                  _model
+                                                                      .textFieldNomeTextController
+                                                                      .text,
+                                                                  _model
                                                                       .textFieldSobrenomeTextController
                                                                       .text,
-                                                                  cpf: _model
+                                                                  _model
                                                                       .textFieldCpfTextController
                                                                       .text,
-                                                                  cep: _model
+                                                                  _model
                                                                       .textFieldCepTextController
                                                                       .text,
-                                                                  numero: int
-                                                                      .tryParse(_model
-                                                                          .textFieldNumeroTextController
-                                                                          .text),
-                                                                  complemento:
-                                                                      _model
-                                                                          .textFieldComlementoTextController
-                                                                          .text,
-                                                                  endereco: _model
+                                                                  int.parse(_model
+                                                                      .textFieldNumeroTextController
+                                                                      .text),
+                                                                  _model
+                                                                      .textFieldComlementoTextController
+                                                                      .text,
+                                                                  _model
                                                                       .textFieldEnderecoTextController
                                                                       .text,
-                                                                  bairro: _model
+                                                                  _model
                                                                       .textFieldBairroTextController
                                                                       .text,
-                                                                  cidade: _model
+                                                                  _model
                                                                       .textFieldCidadeTextController
                                                                       .text,
-                                                                  estado: _model
+                                                                  _model
                                                                       .textFieldEstadoTextController
                                                                       .text,
-                                                                ),
-                                                                ...mapToFirestore(
-                                                                  {
-                                                                    'Pedidos':
-                                                                        FieldValue
-                                                                            .arrayUnion([
-                                                                      _model
-                                                                          .idPedido
-                                                                    ]),
-                                                                  },
-                                                                ),
-                                                              });
-                                                            }
-                                                            if (currentUserEmail ==
-                                                                    null ||
-                                                                currentUserEmail ==
-                                                                    '') {
-                                                              _model.registroCheckout =
-                                                                  await actions
-                                                                      .createNewUser(
-                                                                _model
-                                                                    .textFieldEmailTextController
-                                                                    .text,
-                                                                random_data
-                                                                    .randomString(
-                                                                  8,
-                                                                  8,
-                                                                  true,
-                                                                  true,
-                                                                  true,
-                                                                ),
-                                                                _model
-                                                                    .textFieldTelefoneTextController
-                                                                    .text,
-                                                                _model
-                                                                    .textFieldNomeTextController
-                                                                    .text,
-                                                                _model
-                                                                    .textFieldSobrenomeTextController
-                                                                    .text,
-                                                                _model
-                                                                    .textFieldCpfTextController
-                                                                    .text,
-                                                                _model
-                                                                    .textFieldCepTextController
-                                                                    .text,
-                                                                int.parse(_model
-                                                                    .textFieldNumeroTextController
-                                                                    .text),
-                                                                _model
-                                                                    .textFieldComlementoTextController
-                                                                    .text,
-                                                                _model
-                                                                    .textFieldEnderecoTextController
-                                                                    .text,
-                                                                _model
-                                                                    .textFieldBairroTextController
-                                                                    .text,
-                                                                _model
-                                                                    .textFieldCidadeTextController
-                                                                    .text,
-                                                                _model
-                                                                    .textFieldEstadoTextController
-                                                                    .text,
-                                                              );
-                                                              GoRouter.of(
-                                                                      context)
-                                                                  .prepareAuthEvent();
-
-                                                              final user =
-                                                                  await authManager
-                                                                      .signInWithEmail(
-                                                                context,
-                                                                _model
-                                                                    .textFieldEmailTextController
-                                                                    .text,
-                                                                _model
-                                                                    .registroCheckout!,
-                                                              );
-                                                              if (user ==
-                                                                  null) {
-                                                                return;
+                                                                );
+                                                                _shouldSetState =
+                                                                    true;
+                                                                GoRouter.of(
+                                                                        context)
+                                                                    .prepareAuthEvent();
+                                                                final user =
+                                                                    await authManager
+                                                                        .signInWithEmail(
+                                                                  context,
+                                                                  _model
+                                                                      .textFieldEmailTextController
+                                                                      .text,
+                                                                  _model
+                                                                      .registroCheckout!,
+                                                                );
+                                                                if (user ==
+                                                                    null) {
+                                                                  return;
+                                                                }
+                                                                await currentUserReference!
+                                                                    .update({
+                                                                  ...mapToFirestore(
+                                                                    {
+                                                                      'Pedidos':
+                                                                          FieldValue
+                                                                              .arrayUnion([
+                                                                        _model
+                                                                            .idPedido
+                                                                      ]),
+                                                                    },
+                                                                  ),
+                                                                });
+                                                                await _model
+                                                                    .pedido!
+                                                                    .reference
+                                                                    .update(
+                                                                        createPedidosRecordData(
+                                                                  cliente:
+                                                                      currentUserReference,
+                                                                ));
+                                                              } else {
+                                                                await currentUserReference!
+                                                                    .update({
+                                                                  ...mapToFirestore(
+                                                                    {
+                                                                      'Pedidos':
+                                                                          FieldValue
+                                                                              .arrayUnion([
+                                                                        _model
+                                                                            .idPedido
+                                                                      ]),
+                                                                    },
+                                                                  ),
+                                                                });
                                                               }
-
-                                                              await currentUserReference!
-                                                                  .update({
-                                                                ...mapToFirestore(
-                                                                  {
-                                                                    'Pedidos':
-                                                                        FieldValue
-                                                                            .arrayUnion([
-                                                                      _model
-                                                                          .idPedido
-                                                                    ]),
-                                                                  },
-                                                                ),
-                                                              });
-                                                            } else {
-                                                              await currentUserReference!
-                                                                  .update({
-                                                                ...mapToFirestore(
-                                                                  {
-                                                                    'Pedidos':
-                                                                        FieldValue
-                                                                            .arrayUnion([
-                                                                      _model
-                                                                          .idPedido
-                                                                    ]),
-                                                                  },
-                                                                ),
-                                                              });
+                                                              context.goNamedAuth(
+                                                                  'Obrigado',
+                                                                  context
+                                                                      .mounted);
+                                                              FFAppState()
+                                                                      .CarrinhoState =
+                                                                  CarrinhoStruct();
+                                                              setState(() {});
                                                             }
-
-                                                            context.goNamedAuth(
-                                                                'Obrigado',
-                                                                context
-                                                                    .mounted);
-
-                                                            FFAppState()
-                                                                    .CarrinhoState =
-                                                                CarrinhoStruct();
-                                                            setState(() {});
-
-                                                            setState(() {});
+                                                            if (_shouldSetState)
+                                                              setState(() {});
                                                           },
                                                           text:
                                                               'Finalizar Compra',
                                                           options:
                                                               FFButtonOptions(
-                                                            height: 40.0,
+                                                            height: 40,
                                                             padding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        24.0,
-                                                                        0.0,
-                                                                        24.0,
-                                                                        0.0),
+                                                                        24,
+                                                                        0,
+                                                                        24,
+                                                                        0),
                                                             iconPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
+                                                                        0,
+                                                                        0,
+                                                                        0,
+                                                                        0),
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .primary,
@@ -4707,19 +4729,19 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                       color: Colors
                                                                           .white,
                                                                       letterSpacing:
-                                                                          0.0,
+                                                                          0,
                                                                     ),
-                                                            elevation: 3.0,
+                                                            elevation: 3,
                                                             borderSide:
                                                                 BorderSide(
                                                               color: Colors
                                                                   .transparent,
-                                                              width: 1.0,
+                                                              width: 1,
                                                             ),
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
-                                                                        8.0),
+                                                                        8),
                                                           ),
                                                         ),
                                                       ),
