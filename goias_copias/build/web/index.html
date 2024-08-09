@@ -49,7 +49,7 @@
   <link rel="manifest" href="manifest.json">
   <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "22249513";
+    const serviceWorkerVersion = "2412771740";
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
@@ -79,5 +79,28 @@
       });
     });
   </script>
+
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAb4hsrL-G3Ho5qN--6bVcHV3ka6mEmYBk",
+      authDomain: "printz-6kass7.firebaseapp.com",
+      projectId: "printz-6kass7",
+      storageBucket: "printz-6kass7.appspot.com",
+      messagingSenderId: "408216495405",
+      appId: "1:408216495405:web:086043d8b6da411f7d5fa4"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
+
+
 </body>
 </html>

@@ -47,12 +47,12 @@ const RESOURCES = {"assets/AssetManifest.bin": "356ad7914dd90d8071a4c33aabd63cd7
 "Captura_de_tela_2024-07-18_161031.png": "2ce1b8b0986945244415b0115fcfd067",
 "favicon.png": "2704101cb06ce66e2000356a312be25c",
 "flutter.js": "f31737fb005cd3a3c6bd9355efd33061",
-"flutter_bootstrap.js": "7d8ef6c92241fe6ff28afe4e9001674e",
+"flutter_bootstrap.js": "22f523071f616effd9b3a43338492ed3",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "c9407274a88ab45ccd71e9d01721e8ad",
-"/": "c9407274a88ab45ccd71e9d01721e8ad",
-"main.dart.js": "45508b394408a53de95b5c8dcf4a2739",
+"index.html": "febcae99781d3f67e8fed7ce268acfbb",
+"/": "febcae99781d3f67e8fed7ce268acfbb",
+"main.dart.js": "0c1a40a82e9ede1d20f74c912e07aa43",
 "version.json": "7dd8fd488bdbbc4f18b3fecee45109ad"};
 // The application shell files that are downloaded before a service worker can
 // start.

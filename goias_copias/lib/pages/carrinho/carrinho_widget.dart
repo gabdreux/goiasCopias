@@ -1587,7 +1587,6 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                                       .toList()
                                                                       .take(3)
                                                                       .toList();
-
                                                               return Column(
                                                                 mainAxisSize:
                                                                     MainAxisSize
@@ -1611,37 +1610,52 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                                               .max,
                                                                       children:
                                                                           [
-                                                                        ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                          child:
-                                                                              Image.network(
-                                                                            getJsonField(
+                                                                        if ((getJsonField(
                                                                               fretesItem,
-                                                                              r'''$.company.picture''',
-                                                                            ).toString(),
-                                                                            width:
-                                                                                60.0,
-                                                                            height:
-                                                                                60.0,
-                                                                            fit:
-                                                                                BoxFit.contain,
+                                                                              r'''$.company.name''',
+                                                                            ).toString()) ==
+                                                                            'Correios')
+                                                                          ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8),
+                                                                            child:
+                                                                                Image.asset(
+                                                                              'assets/images/foto.png',
+                                                                              width: 60,
+                                                                              height: 60,
+                                                                              fit: BoxFit.contain,
+                                                                            ),
                                                                           ),
-                                                                        ),
+                                                                        if ((getJsonField(
+                                                                              fretesItem,
+                                                                              r'''$.company.name''',
+                                                                            ).toString()) ==
+                                                                            'Jadlog')
+                                                                          ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8),
+                                                                            child:
+                                                                                Image.asset(
+                                                                              'assets/images/jadlog.png',
+                                                                              width: 60,
+                                                                              height: 60,
+                                                                              fit: BoxFit.contain,
+                                                                            ),
+                                                                          ),
                                                                         Container(
                                                                           constraints:
                                                                               BoxConstraints(
                                                                             maxWidth:
-                                                                                460.0,
+                                                                                460,
                                                                           ),
                                                                           decoration:
                                                                               BoxDecoration(),
                                                                           child:
                                                                               Wrap(
                                                                             spacing:
-                                                                                8.0,
+                                                                                8,
                                                                             runSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             alignment:
                                                                                 WrapAlignment.start,
                                                                             crossAxisAlignment:
@@ -1670,7 +1684,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                                                   ).toString(),
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         fontFamily: 'Inter',
-                                                                                        letterSpacing: 0.0,
+                                                                                        letterSpacing: 0,
                                                                                       ),
                                                                                 ),
                                                                               if (valueOrDefault<bool>(
@@ -1685,7 +1699,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                                                   '-',
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         fontFamily: 'Inter',
-                                                                                        letterSpacing: 0.0,
+                                                                                        letterSpacing: 0,
                                                                                       ),
                                                                                 ),
                                                                               if (valueOrDefault<bool>(
@@ -1703,7 +1717,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                                                   ).toString()}',
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         fontFamily: 'Inter',
-                                                                                        letterSpacing: 0.0,
+                                                                                        letterSpacing: 0,
                                                                                       ),
                                                                                 ),
                                                                               if (valueOrDefault<bool>(
@@ -1718,10 +1732,13 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                                                   'Entrega: ${getJsonField(
                                                                                     fretesItem,
                                                                                     r'''$.delivery_range.max''',
-                                                                                  ).toString()}dias',
+                                                                                  ).toString()}dias${getJsonField(
+                                                                                    fretesItem,
+                                                                                    r'''$.company.name''',
+                                                                                  ).toString()}',
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         fontFamily: 'Inter',
-                                                                                        letterSpacing: 0.0,
+                                                                                        letterSpacing: 0,
                                                                                       ),
                                                                                 ),
                                                                               if (valueOrDefault<bool>(
@@ -1736,7 +1753,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                                                   'Dimensões do objeto ultrapassam o limite da transportadora.',
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         fontFamily: 'Inter',
-                                                                                        letterSpacing: 0.0,
+                                                                                        letterSpacing: 0,
                                                                                       ),
                                                                                 ),
                                                                               if (valueOrDefault<bool>(
@@ -1753,7 +1770,7 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                                                       visualDensity: VisualDensity.compact,
                                                                                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                                                                       shape: RoundedRectangleBorder(
-                                                                                        borderRadius: BorderRadius.circular(4.0),
+                                                                                        borderRadius: BorderRadius.circular(4),
                                                                                       ),
                                                                                     ),
                                                                                     unselectedWidgetColor: FlutterFlowTheme.of(context).secondaryText,
@@ -1846,13 +1863,13 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                                           ),
                                                                         ),
                                                                       ].divide(SizedBox(
-                                                                              width: 10.0)),
+                                                                              width: 10)),
                                                                     ),
                                                                   );
                                                                 }).divide(
                                                                   SizedBox(
                                                                       height:
-                                                                          10.0),
+                                                                          10),
                                                                   filterFn:
                                                                       (fretesIndex) {
                                                                     final fretesItem =

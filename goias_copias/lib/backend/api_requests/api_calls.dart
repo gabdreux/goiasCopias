@@ -320,7 +320,7 @@ class CalculadoraDeFreteCall {
     double? peso,
   }) async {
     // Define a URL do seu proxy local
-    final apiUrl = 'http://localhost:3000/proxy';
+    final apiUrl = 'https://goias-copias-proxy.vercel.app/proxy';
 
     // Define o corpo da requisição
     final ffApiRequestBody = '''
