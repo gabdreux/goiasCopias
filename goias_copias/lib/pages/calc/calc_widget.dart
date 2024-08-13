@@ -9,6 +9,7 @@ import '/components/pop_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -2055,253 +2056,229 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                               _model.visivel =
                                                                   true;
                                                               setState(() {});
-                                                              FFAppState()
-                                                                  .updateCarrinhoStateStruct(
-                                                                (e) => e
-                                                                  ..updateProdutos(
-                                                                    (e) => e.add(
-                                                                        ProdutosStruct(
-                                                                      nome: widget!
-                                                                          .produto
-                                                                          ?.nome,
-                                                                      valor:
-                                                                          getJsonField(
-                                                                        _model
-                                                                            .out,
-                                                                        r'''$.Valor''',
-                                                                      ),
-                                                                      quantidade:
-                                                                          1,
-                                                                      foto: widget!
-                                                                          .produto
-                                                                          ?.foto,
-                                                                      ref: widget!
-                                                                          .produto
-                                                                          ?.reference,
-                                                                      peso:
-                                                                          getJsonField(
-                                                                        _model
-                                                                            .out,
-                                                                        r'''$.Peso''',
-                                                                      ),
-                                                                      altura:
-                                                                          getJsonField(
-                                                                        _model
-                                                                            .out,
-                                                                        r'''$.Dimensoes.depth''',
-                                                                      ),
-                                                                      largura:
-                                                                          getJsonField(
-                                                                        _model
-                                                                            .out,
-                                                                        r'''$.Dimensoes.width''',
-                                                                      ),
-                                                                      espessura:
-                                                                          getJsonField(
-                                                                        _model
-                                                                            .out,
-                                                                        r'''$.Dimensoes.height''',
-                                                                      ),
-                                                                      g75: _model
-                                                                          .checkbox75gValue,
-                                                                      g90: _model
-                                                                          .checkbox90gValue,
-                                                                      frenteVerso:
+                                                              await Future
+                                                                  .wait([
+                                                                Future(
+                                                                    () async {
+                                                                  _model.iterationPdfCarrinho =
+                                                                      0;
+                                                                  setState(
+                                                                      () {});
+                                                                  FFAppState()
+                                                                      .freteItem = [];
+                                                                  FFAppState()
+                                                                          .indexfrete =
+                                                                      999;
+                                                                  FFAppState()
+                                                                      .updateCarrinhoStateStruct(
+                                                                    (e) => e
+                                                                      ..totalTotal =
                                                                           valueOrDefault<
-                                                                              bool>(
-                                                                        _model
-                                                                            .checkboxFrenteVValue,
-                                                                        false,
+                                                                              double>(
+                                                                        functions.stringToDoubleSUBTRAI(
+                                                                            valueOrDefault<String>(
+                                                                              FFAppState().CarrinhoState.totalTotal.toString(),
+                                                                              '0',
+                                                                            ),
+                                                                            valueOrDefault<String>(
+                                                                              FFAppState().CarrinhoState.freteTotal.toString(),
+                                                                              '0',
+                                                                            )),
+                                                                        0.0,
                                                                       ),
-                                                                      orientacao:
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                        _model
-                                                                            .vertical,
-                                                                        'Vertical',
-                                                                      ),
-                                                                      dividido:
-                                                                          valueOrDefault<
-                                                                              bool>(
-                                                                        _model
-                                                                            .divisao,
-                                                                        false,
-                                                                      ),
-                                                                      colorido:
-                                                                          _model
-                                                                              .checkboxColoridoValue,
-                                                                      encadernacoes:
-                                                                          valueOrDefault<
-                                                                              int>(
-                                                                        int.parse(
-                                                                            _model.encad),
-                                                                        0,
-                                                                      ),
-                                                                      impressoes:
-                                                                          valueOrDefault<
-                                                                              int>(
-                                                                        int.parse(
-                                                                            _model.impre),
-                                                                        0,
-                                                                      ),
-                                                                      qntArquivos:
-                                                                          valueOrDefault<
-                                                                              int>(
-                                                                        int.parse(
-                                                                            _model.num),
-                                                                        0,
-                                                                      ),
-                                                                      pDFs: FFAppState()
-                                                                          .pdfStringList,
-                                                                      subTotal:
-                                                                          getJsonField(
-                                                                        _model
-                                                                            .out,
-                                                                        r'''$.Valor''',
-                                                                      ),
-                                                                      pesoTotalProduto:
-                                                                          getJsonField(
-                                                                        _model
-                                                                            .out,
-                                                                        r'''$.Peso''',
-                                                                      ),
-                                                                      alturaTotalProduto:
-                                                                          getJsonField(
-                                                                        _model
-                                                                            .out,
-                                                                        r'''$.Dimensoes.depth''',
-                                                                      ),
-                                                                      larguraTotalProduto:
-                                                                          getJsonField(
-                                                                        _model
-                                                                            .out,
-                                                                        r'''$.Dimensoes.width''',
-                                                                      ),
-                                                                      espessuraTotalProduto:
-                                                                          getJsonField(
-                                                                        _model
-                                                                            .out,
-                                                                        r'''$.Dimensoes.height''',
-                                                                      ),
-                                                                    )),
-                                                                  )
-                                                                  ..subTotalTotal = functions
-                                                                      .stringToDoubleSOMA(
-                                                                          valueOrDefault<
-                                                                              String>(
+                                                                  );
+                                                                  setState(
+                                                                      () {});
+                                                                  FFAppState()
+                                                                      .updateCarrinhoStateStruct(
+                                                                    (e) => e
+                                                                      ..freteTotal =
+                                                                          null,
+                                                                  );
+                                                                  setState(
+                                                                      () {});
+                                                                }),
+                                                                Future(
+                                                                    () async {
+                                                                  FFAppState()
+                                                                      .updateCarrinhoStateStruct(
+                                                                    (e) => e
+                                                                      ..updateProdutos(
+                                                                        (e) => e
+                                                                            .add(ProdutosStruct(
+                                                                          nome: widget!
+                                                                              .produto
+                                                                              ?.nome,
+                                                                          valor:
+                                                                              getJsonField(
+                                                                            _model.out,
+                                                                            r'''$.Valor''',
+                                                                          ),
+                                                                          quantidade:
+                                                                              1,
+                                                                          foto: widget!
+                                                                              .produto
+                                                                              ?.foto,
+                                                                          ref: widget!
+                                                                              .produto
+                                                                              ?.reference,
+                                                                          peso:
+                                                                              getJsonField(
+                                                                            _model.out,
+                                                                            r'''$.Peso''',
+                                                                          ),
+                                                                          altura:
+                                                                              getJsonField(
+                                                                            _model.out,
+                                                                            r'''$.Dimensoes.depth''',
+                                                                          ),
+                                                                          largura:
+                                                                              getJsonField(
+                                                                            _model.out,
+                                                                            r'''$.Dimensoes.width''',
+                                                                          ),
+                                                                          espessura:
+                                                                              getJsonField(
+                                                                            _model.out,
+                                                                            r'''$.Dimensoes.height''',
+                                                                          ),
+                                                                          g75: _model
+                                                                              .checkbox75gValue,
+                                                                          g90: _model
+                                                                              .checkbox90gValue,
+                                                                          frenteVerso:
+                                                                              valueOrDefault<bool>(
+                                                                            _model.checkboxFrenteVValue,
+                                                                            false,
+                                                                          ),
+                                                                          orientacao:
+                                                                              valueOrDefault<String>(
+                                                                            _model.vertical,
+                                                                            'Vertical',
+                                                                          ),
+                                                                          dividido:
+                                                                              valueOrDefault<bool>(
+                                                                            _model.divisao,
+                                                                            false,
+                                                                          ),
+                                                                          colorido:
+                                                                              _model.checkboxColoridoValue,
+                                                                          encadernacoes:
+                                                                              valueOrDefault<int>(
+                                                                            int.parse(_model.encad),
+                                                                            0,
+                                                                          ),
+                                                                          impressoes:
+                                                                              valueOrDefault<int>(
+                                                                            int.parse(_model.impre),
+                                                                            0,
+                                                                          ),
+                                                                          qntArquivos:
+                                                                              valueOrDefault<int>(
+                                                                            int.parse(_model.num),
+                                                                            0,
+                                                                          ),
+                                                                          pDFs:
+                                                                              FFAppState().pdfStringList,
+                                                                          subTotal:
+                                                                              getJsonField(
+                                                                            _model.out,
+                                                                            r'''$.Valor''',
+                                                                          ),
+                                                                          pesoTotalProduto:
+                                                                              getJsonField(
+                                                                            _model.out,
+                                                                            r'''$.Peso''',
+                                                                          ),
+                                                                          alturaTotalProduto:
+                                                                              getJsonField(
+                                                                            _model.out,
+                                                                            r'''$.Dimensoes.depth''',
+                                                                          ),
+                                                                          larguraTotalProduto:
+                                                                              getJsonField(
+                                                                            _model.out,
+                                                                            r'''$.Dimensoes.width''',
+                                                                          ),
+                                                                          espessuraTotalProduto:
+                                                                              getJsonField(
+                                                                            _model.out,
+                                                                            r'''$.Dimensoes.height''',
+                                                                          ),
+                                                                        )),
+                                                                      )
+                                                                      ..subTotalTotal = functions.stringToDoubleSOMA(
+                                                                          valueOrDefault<String>(
                                                                             getJsonField(
                                                                               _model.out,
                                                                               r'''$.Valor''',
                                                                             )?.toString(),
                                                                             '0',
                                                                           ),
-                                                                          valueOrDefault<
-                                                                              String>(
+                                                                          valueOrDefault<String>(
                                                                             FFAppState().CarrinhoState.subTotalTotal.toString(),
                                                                             '0',
                                                                           ))
-                                                                  ..totalTotal = functions
-                                                                      .stringToDoubleSOMA(
-                                                                          valueOrDefault<
-                                                                              String>(
+                                                                      ..totalTotal = functions.stringToDoubleSOMA(
+                                                                          valueOrDefault<String>(
                                                                             getJsonField(
                                                                               _model.out,
                                                                               r'''$.Valor''',
                                                                             )?.toString(),
                                                                             '0',
                                                                           ),
-                                                                          valueOrDefault<
-                                                                              String>(
+                                                                          valueOrDefault<String>(
                                                                             FFAppState().CarrinhoState.totalTotal.toString(),
                                                                             '0',
                                                                           ))
-                                                                  ..incrementQntArquivosTotal(
-                                                                      1)
-                                                                  ..incrementPesoTotal(
-                                                                      valueOrDefault<
-                                                                          double>(
-                                                                    getJsonField(
-                                                                      _model
-                                                                          .out,
-                                                                      r'''$.Peso''',
-                                                                    ),
-                                                                    0.0,
-                                                                  ))
-                                                                  ..incrementAlturaTotal(
-                                                                      valueOrDefault<
-                                                                          double>(
-                                                                    getJsonField(
-                                                                      _model
-                                                                          .out,
-                                                                      r'''$.Dimensoes.depth''',
-                                                                    ),
-                                                                    0.0,
-                                                                  ))
-                                                                  ..incrementLarguraTotal(
-                                                                      valueOrDefault<
-                                                                          double>(
-                                                                    getJsonField(
-                                                                      _model
-                                                                          .out,
-                                                                      r'''$.Dimensoes.width''',
-                                                                    ),
-                                                                    0.0,
-                                                                  ))
-                                                                  ..incrementEspessuraTotal(
-                                                                      valueOrDefault<
-                                                                          double>(
-                                                                    getJsonField(
-                                                                      _model
-                                                                          .out,
-                                                                      r'''$.Dimensoes.height''',
-                                                                    ),
-                                                                    0.0,
-                                                                  )),
-                                                              );
-                                                              setState(() {});
-                                                              _model.iterationPdfCarrinho =
-                                                                  0;
-                                                              setState(() {});
-                                                              FFAppState()
-                                                                  .freteItem = [];
-                                                              FFAppState()
-                                                                      .indexfrete =
-                                                                  999;
-                                                              FFAppState()
-                                                                  .updateCarrinhoStateStruct(
-                                                                (e) => e
-                                                                  ..totalTotal =
-                                                                      valueOrDefault<
-                                                                          double>(
-                                                                    functions.stringToDoubleSUBTRAI(
-                                                                        valueOrDefault<String>(
-                                                                          FFAppState()
-                                                                              .CarrinhoState
-                                                                              .totalTotal
-                                                                              .toString(),
-                                                                          '0',
+                                                                      ..incrementQntArquivosTotal(
+                                                                          1)
+                                                                      ..incrementPesoTotal(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        getJsonField(
+                                                                          _model
+                                                                              .out,
+                                                                          r'''$.Peso''',
                                                                         ),
-                                                                        valueOrDefault<String>(
-                                                                          FFAppState()
-                                                                              .CarrinhoState
-                                                                              .freteTotal
-                                                                              .toString(),
-                                                                          '0',
-                                                                        )),
-                                                                    0.0,
-                                                                  ),
-                                                              );
-                                                              setState(() {});
-                                                              FFAppState()
-                                                                  .updateCarrinhoStateStruct(
-                                                                (e) => e
-                                                                  ..freteTotal =
-                                                                      null,
-                                                              );
-                                                              setState(() {});
+                                                                        0.0,
+                                                                      ))
+                                                                      ..incrementAlturaTotal(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        getJsonField(
+                                                                          _model
+                                                                              .out,
+                                                                          r'''$.Dimensoes.depth''',
+                                                                        ),
+                                                                        0.0,
+                                                                      ))
+                                                                      ..incrementLarguraTotal(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        getJsonField(
+                                                                          _model
+                                                                              .out,
+                                                                          r'''$.Dimensoes.width''',
+                                                                        ),
+                                                                        0.0,
+                                                                      ))
+                                                                      ..incrementEspessuraTotal(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        getJsonField(
+                                                                          _model
+                                                                              .out,
+                                                                          r'''$.Dimensoes.height''',
+                                                                        ),
+                                                                        0.0,
+                                                                      )),
+                                                                  );
 
-                                                              context.pushNamed(
-                                                                  'Carrinho');
+                                                                  context.pushNamed(
+                                                                      'Carrinho');
+                                                                }),
+                                                              ]);
                                                             },
                                                             text:
                                                                 'Adicionar ao carrinho',
