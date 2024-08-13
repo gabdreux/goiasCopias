@@ -698,7 +698,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   'assets/images/steptodown.com762907.jpg',
                                                   width: 320.0,
                                                   height: 200.0,
-                                                  fit: BoxFit.none,
+                                                  fit: BoxFit.cover,
                                                   alignment:
                                                       Alignment(1.0, 0.4),
                                                 ),

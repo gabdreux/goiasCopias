@@ -828,10 +828,10 @@ class _AdmWidgetState extends State<AdmWidget> {
                                   if (_model.pedidos)
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          20.0, 0.0, 0.0, 0.0),
+                                          20, 0, 0, 0),
                                       child: Container(
                                         constraints: BoxConstraints(
-                                          maxWidth: 910.0,
+                                          maxWidth: 910,
                                         ),
                                         decoration: BoxDecoration(),
                                         child: Column(
@@ -841,10 +841,12 @@ class _AdmWidgetState extends State<AdmWidget> {
                                           children: [
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 20.0),
+                                                  .fromSTEB(0, 0, 0, 20),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Text(
                                                     'Pedidos',
@@ -855,11 +857,88 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                         .override(
                                                           fontFamily:
                                                               'Montserrat',
-                                                          fontSize: 20.0,
-                                                          letterSpacing: 0.0,
+                                                          fontSize: 20,
+                                                          letterSpacing: 0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
+                                                  ),
+                                                  FlutterFlowDropDown<String>(
+                                                    controller: _model
+                                                            .dropDownStatusValueController ??=
+                                                        FormFieldController<
+                                                            String>(
+                                                      _model.dropDownStatusValue ??=
+                                                          'Todos',
+                                                    ),
+                                                    options: List<String>.from([
+                                                      'false',
+                                                      'true',
+                                                      'Todos'
+                                                    ]),
+                                                    optionLabels: [
+                                                      'Preparando',
+                                                      'Finalizado',
+                                                      'Todos'
+                                                    ],
+                                                    onChanged: (val) async {
+                                                      setState(() => _model
+                                                              .dropDownStatusValue =
+                                                          val);
+                                                      if (_model
+                                                              .dropDownStatusValue ==
+                                                          'true') {
+                                                        _model.statusPedido =
+                                                            true;
+                                                        setState(() {});
+                                                      } else if (_model
+                                                              .dropDownStatusValue ==
+                                                          'false') {
+                                                        _model.statusPedido =
+                                                            false;
+                                                        setState(() {});
+                                                      } else {
+                                                        _model.statusPedido =
+                                                            null;
+                                                        setState(() {});
+                                                      }
+                                                    },
+                                                    width: 300,
+                                                    height: 56,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0,
+                                                        ),
+                                                    icon: Icon(
+                                                      Icons
+                                                          .keyboard_arrow_down_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24,
+                                                    ),
+                                                    fillColor: FlutterFlowTheme
+                                                            .of(context)
+                                                        .secondaryBackground,
+                                                    elevation: 2,
+                                                    borderColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    borderWidth: 2,
+                                                    borderRadius: 8,
+                                                    margin:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                16, 4, 16, 4),
+                                                    hidesUnderline: true,
+                                                    isOverButton: true,
+                                                    isSearchable: false,
+                                                    isMultiSelect: false,
                                                   ),
                                                 ],
                                               ),
@@ -878,8 +957,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                       Container(
                                                         constraints:
                                                             BoxConstraints(
-                                                          minWidth: 705.0,
-                                                          maxWidth: 900.0,
+                                                          minWidth: 705,
+                                                          maxWidth: 900,
                                                         ),
                                                         decoration:
                                                             BoxDecoration(
@@ -891,7 +970,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                               MainAxisSize.max,
                                                           children: [
                                                             Container(
-                                                              width: 200.0,
+                                                              width: 200,
                                                               decoration:
                                                                   BoxDecoration(),
                                                               child: Text(
@@ -909,9 +988,9 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                               context)
                                                                           .primaryBackground,
                                                                       fontSize:
-                                                                          16.0,
+                                                                          16,
                                                                       letterSpacing:
-                                                                          0.0,
+                                                                          0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500,
@@ -919,7 +998,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                               ),
                                                             ),
                                                             Container(
-                                                              width: 130.0,
+                                                              width: 130,
                                                               decoration:
                                                                   BoxDecoration(),
                                                               child: Text(
@@ -937,9 +1016,9 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                               context)
                                                                           .primaryBackground,
                                                                       fontSize:
-                                                                          16.0,
+                                                                          16,
                                                                       letterSpacing:
-                                                                          0.0,
+                                                                          0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500,
@@ -947,7 +1026,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                               ),
                                                             ),
                                                             Container(
-                                                              width: 180.0,
+                                                              width: 180,
                                                               decoration:
                                                                   BoxDecoration(),
                                                               child: Text(
@@ -965,9 +1044,9 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                               context)
                                                                           .primaryBackground,
                                                                       fontSize:
-                                                                          16.0,
+                                                                          16,
                                                                       letterSpacing:
-                                                                          0.0,
+                                                                          0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500,
@@ -975,7 +1054,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                               ),
                                                             ),
                                                             Container(
-                                                              width: 210.0,
+                                                              width: 210,
                                                               decoration:
                                                                   BoxDecoration(),
                                                               child: Text(
@@ -993,9 +1072,9 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                               context)
                                                                           .primaryBackground,
                                                                       fontSize:
-                                                                          16.0,
+                                                                          16,
                                                                       letterSpacing:
-                                                                          0.0,
+                                                                          0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500,
@@ -1003,7 +1082,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                               ),
                                                             ),
                                                             Container(
-                                                              width: 148.0,
+                                                              width: 148,
                                                               decoration:
                                                                   BoxDecoration(),
                                                               child: Text(
@@ -1021,9 +1100,9 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                               context)
                                                                           .primaryBackground,
                                                                       fontSize:
-                                                                          16.0,
+                                                                          16,
                                                                       letterSpacing:
-                                                                          0.0,
+                                                                          0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500,
@@ -1031,16 +1110,22 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                               ),
                                                             ),
                                                           ].divide(SizedBox(
-                                                              width: 8.0)),
+                                                              width: 8)),
                                                         ),
                                                       ),
                                                       StreamBuilder<
                                                           List<PedidosRecord>>(
                                                         stream:
                                                             queryPedidosRecord(
-                                                          queryBuilder:
-                                                              (pedidosRecord) =>
-                                                                  pedidosRecord.orderBy(
+                                                          queryBuilder: (pedidosRecord) =>
+                                                              pedidosRecord
+                                                                  .where(
+                                                                    'Status_Pedido',
+                                                                    isEqualTo:
+                                                                        _model
+                                                                            .statusPedido,
+                                                                  )
+                                                                  .orderBy(
                                                                       'Data_Criacao',
                                                                       descending:
                                                                           true),
@@ -1052,8 +1137,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                               .hasData) {
                                                             return Center(
                                                               child: SizedBox(
-                                                                width: 50.0,
-                                                                height: 50.0,
+                                                                width: 50,
+                                                                height: 50,
                                                                 child:
                                                                     CircularProgressIndicator(
                                                                   valueColor:
@@ -1070,7 +1155,6 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                           List<PedidosRecord>
                                                               columnPedidosRecordList =
                                                               snapshot.data!;
-
                                                           return SingleChildScrollView(
                                                             child: Column(
                                                               mainAxisSize:
@@ -1086,10 +1170,10 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                 return Padding(
                                                                   padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          30.0),
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          30),
                                                                   child:
                                                                       Container(
                                                                     decoration:
@@ -1100,7 +1184,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .alternate,
                                                                         width:
-                                                                            1.0,
+                                                                            1,
                                                                       ),
                                                                     ),
                                                                     child:
@@ -1113,19 +1197,19 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                           constraints:
                                                                               BoxConstraints(
                                                                             minWidth:
-                                                                                705.0,
+                                                                                705,
                                                                             maxWidth:
-                                                                                900.0,
+                                                                                900,
                                                                           ),
                                                                           decoration:
                                                                               BoxDecoration(),
                                                                           child:
                                                                               Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0.0,
-                                                                                10.0,
-                                                                                0.0,
-                                                                                10.0),
+                                                                                0,
+                                                                                10,
+                                                                                0,
+                                                                                10),
                                                                             child:
                                                                                 Row(
                                                                               mainAxisSize: MainAxisSize.max,
@@ -1133,12 +1217,11 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                               crossAxisAlignment: CrossAxisAlignment.center,
                                                                               children: [
                                                                                 Container(
-                                                                                  width: 200.0,
+                                                                                  width: 200,
                                                                                   decoration: BoxDecoration(),
                                                                                   child: Builder(
                                                                                     builder: (context) {
                                                                                       final produtosPedido = columnPedidosRecord.produtos.toList();
-
                                                                                       return Column(
                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                         children: List.generate(produtosPedido.length, (produtosPedidoIndex) {
@@ -1150,8 +1233,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                               if (!snapshot.hasData) {
                                                                                                 return Center(
                                                                                                   child: SizedBox(
-                                                                                                    width: 50.0,
-                                                                                                    height: 50.0,
+                                                                                                    width: 50,
+                                                                                                    height: 50,
                                                                                                     child: CircularProgressIndicator(
                                                                                                       valueColor: AlwaysStoppedAnimation<Color>(
                                                                                                         FlutterFlowTheme.of(context).primary,
@@ -1160,9 +1243,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                   ),
                                                                                                 );
                                                                                               }
-
                                                                                               final columnProdutosRecord = snapshot.data!;
-
                                                                                               return Column(
                                                                                                 mainAxisSize: MainAxisSize.max,
                                                                                                 children: [
@@ -1170,20 +1251,20 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                     columnProdutosRecord.nome,
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                           fontFamily: 'Inter',
-                                                                                                          letterSpacing: 0.0,
+                                                                                                          letterSpacing: 0,
                                                                                                         ),
                                                                                                   ),
                                                                                                 ],
                                                                                               );
                                                                                             },
                                                                                           );
-                                                                                        }).divide(SizedBox(height: 5.0)),
+                                                                                        }).divide(SizedBox(height: 5)),
                                                                                       );
                                                                                     },
                                                                                   ),
                                                                                 ),
                                                                                 Container(
-                                                                                  width: 130.0,
+                                                                                  width: 130,
                                                                                   decoration: BoxDecoration(),
                                                                                   child: Text(
                                                                                     dateTimeFormat(
@@ -1195,8 +1276,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                           fontFamily: 'Montserrat',
                                                                                           color: FlutterFlowTheme.of(context).primaryText,
-                                                                                          fontSize: 16.0,
-                                                                                          letterSpacing: 0.0,
+                                                                                          fontSize: 16,
+                                                                                          letterSpacing: 0,
                                                                                           fontWeight: FontWeight.w500,
                                                                                         ),
                                                                                   ),
@@ -1210,8 +1291,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                     if (!snapshot.hasData) {
                                                                                       return Center(
                                                                                         child: SizedBox(
-                                                                                          width: 50.0,
-                                                                                          height: 50.0,
+                                                                                          width: 50,
+                                                                                          height: 50,
                                                                                           child: CircularProgressIndicator(
                                                                                             valueColor: AlwaysStoppedAnimation<Color>(
                                                                                               FlutterFlowTheme.of(context).primary,
@@ -1221,9 +1302,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                       );
                                                                                     }
                                                                                     final containerStatusPagamentoResponse = snapshot.data!;
-
                                                                                     return Container(
-                                                                                      width: 180.0,
+                                                                                      width: 180,
                                                                                       decoration: BoxDecoration(),
                                                                                       child: Text(
                                                                                         () {
@@ -1259,8 +1339,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                               fontFamily: 'Montserrat',
                                                                                               color: FlutterFlowTheme.of(context).primaryText,
-                                                                                              fontSize: 16.0,
-                                                                                              letterSpacing: 0.0,
+                                                                                              fontSize: 16,
+                                                                                              letterSpacing: 0,
                                                                                               fontWeight: FontWeight.w500,
                                                                                             ),
                                                                                       ),
@@ -1268,7 +1348,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                   },
                                                                                 ),
                                                                                 Container(
-                                                                                  width: 210.0,
+                                                                                  width: 210,
                                                                                   decoration: BoxDecoration(),
                                                                                   child: Column(
                                                                                     mainAxisSize: MainAxisSize.max,
@@ -1279,7 +1359,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                             visualDensity: VisualDensity.compact,
                                                                                             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                                                                             shape: RoundedRectangleBorder(
-                                                                                              borderRadius: BorderRadius.circular(4.0),
+                                                                                              borderRadius: BorderRadius.circular(4),
                                                                                             ),
                                                                                           ),
                                                                                           unselectedWidgetColor: FlutterFlowTheme.of(context).secondaryText,
@@ -1310,7 +1390,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                   ),
                                                                                 ),
                                                                                 Container(
-                                                                                  width: 148.0,
+                                                                                  width: 148,
                                                                                   decoration: BoxDecoration(),
                                                                                   child: Text(
                                                                                     formatNumber(
@@ -1323,13 +1403,13 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                           fontFamily: 'Montserrat',
                                                                                           color: FlutterFlowTheme.of(context).primaryText,
-                                                                                          fontSize: 16.0,
-                                                                                          letterSpacing: 0.0,
+                                                                                          fontSize: 16,
+                                                                                          letterSpacing: 0,
                                                                                           fontWeight: FontWeight.w500,
                                                                                         ),
                                                                                   ),
                                                                                 ),
-                                                                              ].divide(SizedBox(width: 8.0)),
+                                                                              ].divide(SizedBox(width: 8)),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -1337,9 +1417,9 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                           constraints:
                                                                               BoxConstraints(
                                                                             minWidth:
-                                                                                705.0,
+                                                                                705,
                                                                             maxWidth:
-                                                                                900.0,
+                                                                                900,
                                                                           ),
                                                                           decoration:
                                                                               BoxDecoration(
@@ -1370,8 +1450,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                         if (!snapshot.hasData) {
                                                                                           return Center(
                                                                                             child: SizedBox(
-                                                                                              width: 50.0,
-                                                                                              height: 50.0,
+                                                                                              width: 50,
+                                                                                              height: 50,
                                                                                               child: CircularProgressIndicator(
                                                                                                 valueColor: AlwaysStoppedAnimation<Color>(
                                                                                                   FlutterFlowTheme.of(context).primary,
@@ -1381,11 +1461,10 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                           );
                                                                                         }
                                                                                         List<PedidoInfosRecord> containerPedidoInfosRecordList = snapshot.data!;
-
                                                                                         return Container(
                                                                                           constraints: BoxConstraints(
-                                                                                            minWidth: 705.0,
-                                                                                            maxWidth: 900.0,
+                                                                                            minWidth: 705,
+                                                                                            maxWidth: 900,
                                                                                           ),
                                                                                           decoration: BoxDecoration(),
                                                                                           child: Column(
@@ -1393,8 +1472,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                             children: [
                                                                                               Container(
                                                                                                 constraints: BoxConstraints(
-                                                                                                  minWidth: 705.0,
-                                                                                                  maxWidth: 900.0,
+                                                                                                  minWidth: 705,
+                                                                                                  maxWidth: 900,
                                                                                                 ),
                                                                                                 decoration: BoxDecoration(
                                                                                                   color: Color(0xFF4894C1),
@@ -1405,7 +1484,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                   children: [
                                                                                                     if (containerPedidoInfosRecordList.where((e) => e.pDFs.length > 0).toList().length > 0)
                                                                                                       Container(
-                                                                                                        width: 200.0,
+                                                                                                        width: 200,
                                                                                                         decoration: BoxDecoration(),
                                                                                                         child: Text(
                                                                                                           'PDFs',
@@ -1413,14 +1492,14 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                 fontFamily: 'Montserrat',
                                                                                                                 color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                                                fontSize: 16.0,
-                                                                                                                letterSpacing: 0.0,
+                                                                                                                fontSize: 16,
+                                                                                                                letterSpacing: 0,
                                                                                                                 fontWeight: FontWeight.w500,
                                                                                                               ),
                                                                                                         ),
                                                                                                       ),
                                                                                                     Container(
-                                                                                                      width: 210.0,
+                                                                                                      width: 210,
                                                                                                       decoration: BoxDecoration(),
                                                                                                       child: Text(
                                                                                                         'Infos',
@@ -1428,19 +1507,18 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                               fontFamily: 'Montserrat',
                                                                                                               color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                                              fontSize: 16.0,
-                                                                                                              letterSpacing: 0.0,
+                                                                                                              fontSize: 16,
+                                                                                                              letterSpacing: 0,
                                                                                                               fontWeight: FontWeight.w500,
                                                                                                             ),
                                                                                                       ),
                                                                                                     ),
-                                                                                                  ].divide(SizedBox(width: 8.0)),
+                                                                                                  ].divide(SizedBox(width: 8)),
                                                                                                 ),
                                                                                               ),
                                                                                               Builder(
                                                                                                 builder: (context) {
                                                                                                   final pedidoItem = containerPedidoInfosRecordList.toList();
-
                                                                                                   return Column(
                                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                                     children: List.generate(pedidoItem.length, (pedidoItemIndex) {
@@ -1449,7 +1527,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                                         children: [
                                                                                                           Padding(
-                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                                                                                                             child: Row(
                                                                                                               mainAxisSize: MainAxisSize.max,
                                                                                                               mainAxisAlignment: MainAxisAlignment.start,
@@ -1457,20 +1535,19 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                               children: [
                                                                                                                 if (containerPedidoInfosRecordList.where((e) => e.pDFs.length > 0).toList().length > 0)
                                                                                                                   Container(
-                                                                                                                    width: 200.0,
+                                                                                                                    width: 200,
                                                                                                                     decoration: BoxDecoration(),
                                                                                                                     child: Padding(
-                                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 10.0),
+                                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 10),
                                                                                                                       child: Builder(
                                                                                                                         builder: (context) {
                                                                                                                           final pdfsInfosFunction = functions.pathToString(pedidoItemItem.pDFs.toList())?.toList() ?? [];
-
                                                                                                                           return Column(
                                                                                                                             mainAxisSize: MainAxisSize.max,
                                                                                                                             children: List.generate(pdfsInfosFunction.length, (pdfsInfosFunctionIndex) {
                                                                                                                               final pdfsInfosFunctionItem = pdfsInfosFunction[pdfsInfosFunctionIndex];
                                                                                                                               return Padding(
-                                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
                                                                                                                                 child: FFButtonWidget(
                                                                                                                                   onPressed: () async {
                                                                                                                                     await launchURL(pdfsInfosFunctionItem);
@@ -1480,25 +1557,25 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                                         0,
                                                                                                                                       ) + 1).toString()}',
                                                                                                                                   options: FFButtonOptions(
-                                                                                                                                    height: 40.0,
-                                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                                                                                                                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                                                    height: 40,
+                                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                                                                                                                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                                                                                                                                     color: Colors.white,
                                                                                                                                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                                                                                                                                           fontFamily: 'Inter',
                                                                                                                                           color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                                          letterSpacing: 0.0,
+                                                                                                                                          letterSpacing: 0,
                                                                                                                                         ),
-                                                                                                                                    elevation: 3.0,
+                                                                                                                                    elevation: 3,
                                                                                                                                     borderSide: BorderSide(
                                                                                                                                       color: Colors.transparent,
-                                                                                                                                      width: 1.0,
+                                                                                                                                      width: 1,
                                                                                                                                     ),
-                                                                                                                                    borderRadius: BorderRadius.circular(8.0),
+                                                                                                                                    borderRadius: BorderRadius.circular(8),
                                                                                                                                   ),
                                                                                                                                 ),
                                                                                                                               );
-                                                                                                                            }).divide(SizedBox(height: 6.0)),
+                                                                                                                            }).divide(SizedBox(height: 6)),
                                                                                                                           );
                                                                                                                         },
                                                                                                                       ),
@@ -1506,16 +1583,16 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                   ),
                                                                                                                 if (containerPedidoInfosRecordList.where((e) => e.pDFs.length > 0).toList().length > 0)
                                                                                                                   Padding(
-                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                                                                                                                     child: Column(
                                                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                                                       children: [
                                                                                                                         Container(
-                                                                                                                          width: 210.0,
+                                                                                                                          width: 210,
                                                                                                                           decoration: BoxDecoration(),
                                                                                                                         ),
                                                                                                                         Container(
-                                                                                                                          width: 210.0,
+                                                                                                                          width: 210,
                                                                                                                           decoration: BoxDecoration(),
                                                                                                                           child: Text(
                                                                                                                             'Qnt. Arquivos: ${pedidoItemItem.qntArquivos.toString()}',
@@ -1523,8 +1600,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                   fontFamily: 'Montserrat',
                                                                                                                                   color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                                  fontSize: 16.0,
-                                                                                                                                  letterSpacing: 0.0,
+                                                                                                                                  fontSize: 16,
+                                                                                                                                  letterSpacing: 0,
                                                                                                                                   fontWeight: FontWeight.w500,
                                                                                                                                 ),
                                                                                                                           ),
@@ -1535,13 +1612,13 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                 fontFamily: 'Montserrat',
                                                                                                                                 color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                                fontSize: 16.0,
-                                                                                                                                letterSpacing: 0.0,
+                                                                                                                                fontSize: 16,
+                                                                                                                                letterSpacing: 0,
                                                                                                                                 fontWeight: FontWeight.w500,
                                                                                                                               ),
                                                                                                                         ),
                                                                                                                         Container(
-                                                                                                                          width: 210.0,
+                                                                                                                          width: 210,
                                                                                                                           decoration: BoxDecoration(),
                                                                                                                           child: Text(
                                                                                                                             'Encadernações: ${pedidoItemItem.encadernacoes.toString()}',
@@ -1549,8 +1626,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                   fontFamily: 'Montserrat',
                                                                                                                                   color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                                  fontSize: 16.0,
-                                                                                                                                  letterSpacing: 0.0,
+                                                                                                                                  fontSize: 16,
+                                                                                                                                  letterSpacing: 0,
                                                                                                                                   fontWeight: FontWeight.w500,
                                                                                                                                 ),
                                                                                                                           ),
@@ -1561,13 +1638,13 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                 fontFamily: 'Montserrat',
                                                                                                                                 color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                                fontSize: 16.0,
-                                                                                                                                letterSpacing: 0.0,
+                                                                                                                                fontSize: 16,
+                                                                                                                                letterSpacing: 0,
                                                                                                                                 fontWeight: FontWeight.w500,
                                                                                                                               ),
                                                                                                                         ),
                                                                                                                         Container(
-                                                                                                                          width: 210.0,
+                                                                                                                          width: 210,
                                                                                                                           decoration: BoxDecoration(),
                                                                                                                           child: Text(
                                                                                                                             'Colorido: ${pedidoItemItem.colorido ? 'Sim' : 'Não'}',
@@ -1575,14 +1652,14 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                   fontFamily: 'Montserrat',
                                                                                                                                   color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                                  fontSize: 16.0,
-                                                                                                                                  letterSpacing: 0.0,
+                                                                                                                                  fontSize: 16,
+                                                                                                                                  letterSpacing: 0,
                                                                                                                                   fontWeight: FontWeight.w500,
                                                                                                                                 ),
                                                                                                                           ),
                                                                                                                         ),
                                                                                                                         Container(
-                                                                                                                          width: 210.0,
+                                                                                                                          width: 210,
                                                                                                                           decoration: BoxDecoration(),
                                                                                                                           child: Text(
                                                                                                                             'Orientação: ${pedidoItemItem.orientacao}',
@@ -1590,14 +1667,14 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                   fontFamily: 'Montserrat',
                                                                                                                                   color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                                  fontSize: 16.0,
-                                                                                                                                  letterSpacing: 0.0,
+                                                                                                                                  fontSize: 16,
+                                                                                                                                  letterSpacing: 0,
                                                                                                                                   fontWeight: FontWeight.w500,
                                                                                                                                 ),
                                                                                                                           ),
                                                                                                                         ),
                                                                                                                         Container(
-                                                                                                                          width: 210.0,
+                                                                                                                          width: 210,
                                                                                                                           decoration: BoxDecoration(),
                                                                                                                           child: Text(
                                                                                                                             'Dividido: ${pedidoItemItem.dividido ? 'Sim' : 'Não'}',
@@ -1605,17 +1682,17 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                   fontFamily: 'Montserrat',
                                                                                                                                   color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                                  fontSize: 16.0,
-                                                                                                                                  letterSpacing: 0.0,
+                                                                                                                                  fontSize: 16,
+                                                                                                                                  letterSpacing: 0,
                                                                                                                                   fontWeight: FontWeight.w500,
                                                                                                                                 ),
                                                                                                                           ),
                                                                                                                         ),
-                                                                                                                      ].divide(SizedBox(height: 5.0)),
+                                                                                                                      ].divide(SizedBox(height: 5)),
                                                                                                                     ),
                                                                                                                   ),
                                                                                                                 Padding(
-                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 10.0),
+                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 10),
                                                                                                                   child: StreamBuilder<ProdutosRecord>(
                                                                                                                     stream: ProdutosRecord.getDocument(pedidoItemItem.produto!),
                                                                                                                     builder: (context, snapshot) {
@@ -1623,8 +1700,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                       if (!snapshot.hasData) {
                                                                                                                         return Center(
                                                                                                                           child: SizedBox(
-                                                                                                                            width: 50.0,
-                                                                                                                            height: 50.0,
+                                                                                                                            width: 50,
+                                                                                                                            height: 50,
                                                                                                                             child: CircularProgressIndicator(
                                                                                                                               valueColor: AlwaysStoppedAnimation<Color>(
                                                                                                                                 FlutterFlowTheme.of(context).primary,
@@ -1633,14 +1710,12 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                           ),
                                                                                                                         );
                                                                                                                       }
-
                                                                                                                       final columnProdutosRecord = snapshot.data!;
-
                                                                                                                       return Column(
                                                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                                                         children: [
                                                                                                                           Container(
-                                                                                                                            width: 210.0,
+                                                                                                                            width: 210,
                                                                                                                             decoration: BoxDecoration(),
                                                                                                                             child: Text(
                                                                                                                               'Produto: ${columnProdutosRecord.nome}',
@@ -1648,14 +1723,14 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                     fontFamily: 'Montserrat',
                                                                                                                                     color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                                    fontSize: 16.0,
-                                                                                                                                    letterSpacing: 0.0,
+                                                                                                                                    fontSize: 16,
+                                                                                                                                    letterSpacing: 0,
                                                                                                                                     fontWeight: FontWeight.w500,
                                                                                                                                   ),
                                                                                                                             ),
                                                                                                                           ),
                                                                                                                           Container(
-                                                                                                                            width: 210.0,
+                                                                                                                            width: 210,
                                                                                                                             decoration: BoxDecoration(),
                                                                                                                             child: Text(
                                                                                                                               'Quantidade/Cópias: ${pedidoItemItem.quantidade.toString()}',
@@ -1663,22 +1738,22 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                     fontFamily: 'Montserrat',
                                                                                                                                     color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                                    fontSize: 16.0,
-                                                                                                                                    letterSpacing: 0.0,
+                                                                                                                                    fontSize: 16,
+                                                                                                                                    letterSpacing: 0,
                                                                                                                                     fontWeight: FontWeight.w500,
                                                                                                                                   ),
                                                                                                                             ),
                                                                                                                           ),
-                                                                                                                        ].divide(SizedBox(height: 5.0)),
+                                                                                                                        ].divide(SizedBox(height: 5)),
                                                                                                                       );
                                                                                                                     },
                                                                                                                   ),
                                                                                                                 ),
-                                                                                                              ].divide(SizedBox(width: 8.0)),
+                                                                                                              ].divide(SizedBox(width: 8)),
                                                                                                             ),
                                                                                                           ),
                                                                                                           Divider(
-                                                                                                            thickness: 1.0,
+                                                                                                            thickness: 1,
                                                                                                             color: FlutterFlowTheme.of(context).alternate,
                                                                                                           ),
                                                                                                         ],
@@ -1694,8 +1769,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                     ),
                                                                                     Container(
                                                                                       constraints: BoxConstraints(
-                                                                                        minWidth: 705.0,
-                                                                                        maxWidth: 900.0,
+                                                                                        minWidth: 705,
+                                                                                        maxWidth: 900,
                                                                                       ),
                                                                                       decoration: BoxDecoration(),
                                                                                       child: Column(
@@ -1703,8 +1778,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                         children: [
                                                                                           Container(
                                                                                             constraints: BoxConstraints(
-                                                                                              minWidth: 705.0,
-                                                                                              maxWidth: 900.0,
+                                                                                              minWidth: 705,
+                                                                                              maxWidth: 900,
                                                                                             ),
                                                                                             decoration: BoxDecoration(
                                                                                               color: Color(0xFF4894C1),
@@ -1713,7 +1788,7 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                               mainAxisSize: MainAxisSize.max,
                                                                                               children: [
                                                                                                 Container(
-                                                                                                  width: 300.0,
+                                                                                                  width: 300,
                                                                                                   decoration: BoxDecoration(),
                                                                                                   child: Text(
                                                                                                     'Cliente',
@@ -1721,14 +1796,14 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                           fontFamily: 'Montserrat',
                                                                                                           color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                                          fontSize: 16.0,
-                                                                                                          letterSpacing: 0.0,
+                                                                                                          fontSize: 16,
+                                                                                                          letterSpacing: 0,
                                                                                                           fontWeight: FontWeight.w500,
                                                                                                         ),
                                                                                                   ),
                                                                                                 ),
                                                                                                 Container(
-                                                                                                  width: 580.0,
+                                                                                                  width: 580,
                                                                                                   decoration: BoxDecoration(),
                                                                                                   child: Text(
                                                                                                     'Frete',
@@ -1736,17 +1811,17 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                           fontFamily: 'Montserrat',
                                                                                                           color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                                          fontSize: 16.0,
-                                                                                                          letterSpacing: 0.0,
+                                                                                                          fontSize: 16,
+                                                                                                          letterSpacing: 0,
                                                                                                           fontWeight: FontWeight.w500,
                                                                                                         ),
                                                                                                   ),
                                                                                                 ),
-                                                                                              ].divide(SizedBox(width: 8.0)),
+                                                                                              ].divide(SizedBox(width: 8)),
                                                                                             ),
                                                                                           ),
                                                                                           Padding(
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                                                                                             child: Row(
                                                                                               mainAxisSize: MainAxisSize.max,
                                                                                               mainAxisAlignment: MainAxisAlignment.start,
@@ -1759,8 +1834,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                     if (!snapshot.hasData) {
                                                                                                       return Center(
                                                                                                         child: SizedBox(
-                                                                                                          width: 50.0,
-                                                                                                          height: 50.0,
+                                                                                                          width: 50,
+                                                                                                          height: 50,
                                                                                                           child: CircularProgressIndicator(
                                                                                                             valueColor: AlwaysStoppedAnimation<Color>(
                                                                                                               FlutterFlowTheme.of(context).primary,
@@ -1769,14 +1844,12 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                         ),
                                                                                                       );
                                                                                                     }
-
                                                                                                     final containerUsersRecord = snapshot.data!;
-
                                                                                                     return Container(
-                                                                                                      width: 300.0,
+                                                                                                      width: 300,
                                                                                                       decoration: BoxDecoration(),
                                                                                                       child: Padding(
-                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 10.0),
+                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 10),
                                                                                                         child: Column(
                                                                                                           mainAxisSize: MainAxisSize.max,
                                                                                                           children: [
@@ -1786,8 +1859,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                     fontFamily: 'Montserrat',
                                                                                                                     color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                    fontSize: 16.0,
-                                                                                                                    letterSpacing: 0.0,
+                                                                                                                    fontSize: 16,
+                                                                                                                    letterSpacing: 0,
                                                                                                                     fontWeight: FontWeight.w500,
                                                                                                                   ),
                                                                                                             ),
@@ -1797,8 +1870,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                     fontFamily: 'Montserrat',
                                                                                                                     color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                    fontSize: 16.0,
-                                                                                                                    letterSpacing: 0.0,
+                                                                                                                    fontSize: 16,
+                                                                                                                    letterSpacing: 0,
                                                                                                                     fontWeight: FontWeight.w500,
                                                                                                                   ),
                                                                                                             ),
@@ -1808,22 +1881,22 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                     fontFamily: 'Montserrat',
                                                                                                                     color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                    fontSize: 16.0,
-                                                                                                                    letterSpacing: 0.0,
+                                                                                                                    fontSize: 16,
+                                                                                                                    letterSpacing: 0,
                                                                                                                     fontWeight: FontWeight.w500,
                                                                                                                   ),
                                                                                                             ),
-                                                                                                          ].divide(SizedBox(height: 8.0)),
+                                                                                                          ].divide(SizedBox(height: 8)),
                                                                                                         ),
                                                                                                       ),
                                                                                                     );
                                                                                                   },
                                                                                                 ),
                                                                                                 Container(
-                                                                                                  width: 580.0,
+                                                                                                  width: 580,
                                                                                                   decoration: BoxDecoration(),
                                                                                                   child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 10.0),
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 10),
                                                                                                     child: Column(
                                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                                       children: [
@@ -1833,13 +1906,13 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                 fontFamily: 'Montserrat',
                                                                                                                 color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                fontSize: 16.0,
-                                                                                                                letterSpacing: 0.0,
+                                                                                                                fontSize: 16,
+                                                                                                                letterSpacing: 0,
                                                                                                                 fontWeight: FontWeight.w500,
                                                                                                               ),
                                                                                                         ),
                                                                                                         Container(
-                                                                                                          width: 277.0,
+                                                                                                          width: 277,
                                                                                                           decoration: BoxDecoration(),
                                                                                                           child: Column(
                                                                                                             mainAxisSize: MainAxisSize.max,
@@ -1850,8 +1923,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                       fontFamily: 'Montserrat',
                                                                                                                       color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                      fontSize: 16.0,
-                                                                                                                      letterSpacing: 0.0,
+                                                                                                                      fontSize: 16,
+                                                                                                                      letterSpacing: 0,
                                                                                                                       fontWeight: FontWeight.w500,
                                                                                                                     ),
                                                                                                               ),
@@ -1861,8 +1934,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                       fontFamily: 'Montserrat',
                                                                                                                       color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                      fontSize: 16.0,
-                                                                                                                      letterSpacing: 0.0,
+                                                                                                                      fontSize: 16,
+                                                                                                                      letterSpacing: 0,
                                                                                                                       fontWeight: FontWeight.w500,
                                                                                                                     ),
                                                                                                               ),
@@ -1872,8 +1945,8 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                       fontFamily: 'Montserrat',
                                                                                                                       color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                      fontSize: 16.0,
-                                                                                                                      letterSpacing: 0.0,
+                                                                                                                      fontSize: 16,
+                                                                                                                      letterSpacing: 0,
                                                                                                                       fontWeight: FontWeight.w500,
                                                                                                                     ),
                                                                                                               ),
@@ -1883,16 +1956,16 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                       fontFamily: 'Montserrat',
                                                                                                                       color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                      fontSize: 16.0,
-                                                                                                                      letterSpacing: 0.0,
+                                                                                                                      fontSize: 16,
+                                                                                                                      letterSpacing: 0,
                                                                                                                       fontWeight: FontWeight.w500,
                                                                                                                     ),
                                                                                                               ),
-                                                                                                            ].divide(SizedBox(height: 8.0)),
+                                                                                                            ].divide(SizedBox(height: 8)),
                                                                                                           ),
                                                                                                         ),
                                                                                                         Container(
-                                                                                                          width: 277.0,
+                                                                                                          width: 277,
                                                                                                           decoration: BoxDecoration(),
                                                                                                           child: Text(
                                                                                                             'Valor Frete: ${formatNumber(
@@ -1905,17 +1978,17 @@ class _AdmWidgetState extends State<AdmWidget> {
                                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                   fontFamily: 'Montserrat',
                                                                                                                   color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                  fontSize: 16.0,
-                                                                                                                  letterSpacing: 0.0,
+                                                                                                                  fontSize: 16,
+                                                                                                                  letterSpacing: 0,
                                                                                                                   fontWeight: FontWeight.w500,
                                                                                                                 ),
                                                                                                           ),
                                                                                                         ),
-                                                                                                      ].divide(SizedBox(height: 8.0)),
+                                                                                                      ].divide(SizedBox(height: 8)),
                                                                                                     ),
                                                                                                   ),
                                                                                                 ),
-                                                                                              ].divide(SizedBox(width: 8.0)),
+                                                                                              ].divide(SizedBox(width: 8)),
                                                                                             ),
                                                                                           ),
                                                                                         ],

@@ -1320,12 +1320,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                         ),
                                       ),
                                       Align(
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                        alignment: AlignmentDirectional(0, 0),
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
+                                                  0, 0, 0, 16),
                                           child: FFButtonWidget(
                                             onPressed: () async {
                                               GoRouter.of(context)
@@ -1346,7 +1345,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                 );
                                                 return;
                                               }
-
                                               final user = await authManager
                                                   .createAccountWithEmail(
                                                 context,
@@ -1360,7 +1358,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                               if (user == null) {
                                                 return;
                                               }
-
                                               await UsersRecord.collection
                                                   .doc(user.uid)
                                                   .update({
@@ -1376,45 +1373,29 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   },
                                                 ),
                                               });
-
                                               if (widget!.checkout) {
                                                 FFAppState().Login = false;
                                                 setState(() {});
-
-                                                context.goNamedAuth(
-                                                  'Checkout',
-                                                  context.mounted,
-                                                  queryParameters: {
-                                                    'newuser': serializeParam(
-                                                      true,
-                                                      ParamType.bool,
-                                                    ),
-                                                  }.withoutNulls,
-                                                );
-                                              } else {
+                                                context.goNamedAuth('Checkout',
+                                                    context.mounted);
+                                              } else if (widget!.userArea) {
                                                 FFAppState().Login = false;
                                                 setState(() {});
-                                              }
-
-                                              if (widget!.userArea) {
-                                                FFAppState().Login = false;
-                                                setState(() {});
-
                                                 context.goNamedAuth('UserArea',
                                                     context.mounted);
                                               } else {
-                                                FFAppState().Login = false;
-                                                setState(() {});
+                                                context.goNamedAuth(
+                                                    'Loja', context.mounted);
                                               }
                                             },
                                             text: 'Registrar',
                                             options: FFButtonOptions(
-                                              width: 230.0,
-                                              height: 52.0,
+                                              width: 230,
+                                              height: 52,
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                  .fromSTEB(0, 0, 0, 0),
                                               iconPadding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                  .fromSTEB(0, 0, 0, 0),
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
@@ -1424,15 +1405,15 @@ class _LoginWidgetState extends State<LoginWidget>
                                                       .override(
                                                         fontFamily: 'Inter',
                                                         color: Colors.white,
-                                                        letterSpacing: 0.0,
+                                                        letterSpacing: 0,
                                                       ),
-                                              elevation: 3.0,
+                                              elevation: 3,
                                               borderSide: BorderSide(
                                                 color: Colors.transparent,
-                                                width: 1.0,
+                                                width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(40.0),
+                                                  BorderRadius.circular(40),
                                             ),
                                           ),
                                         ),

@@ -40,6 +40,8 @@ class AdmModel extends FlutterFlowModel<AdmWidget> {
 
   String? photoURLEdit;
 
+  bool? statusPedido;
+
   ///  State fields for stateful widgets in this page.
 
   // Model for Drawer component.
@@ -108,6 +110,9 @@ class AdmModel extends FlutterFlowModel<AdmWidget> {
   FFUploadedFile uploadedLocalFile5 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl5 = '';
+
+  String? dropDownStatusValue;
+  FormFieldController<String>? dropDownStatusValueController;
 
   // Model for Footer component.
   late FooterModel footerModel;

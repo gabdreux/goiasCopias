@@ -19,6 +19,7 @@ import '/flutter_flow/random_data_util.dart' as random_data;
 import 'checkout_widget.dart' show CheckoutWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -59,6 +60,15 @@ class CheckoutModel extends FlutterFlowModel<CheckoutWidget> {
   int insideIterationCount = 0;
 
   int fireIterationCount = 0;
+
+  List<String> parcelamento = [];
+  void addToParcelamento(String item) => parcelamento.add(item);
+  void removeFromParcelamento(String item) => parcelamento.remove(item);
+  void removeAtIndexFromParcelamento(int index) => parcelamento.removeAt(index);
+  void insertAtIndexInParcelamento(int index, String item) =>
+      parcelamento.insert(index, item);
+  void updateParcelamentoAtIndex(int index, Function(String) updateFn) =>
+      parcelamento[index] = updateFn(parcelamento[index]);
 
   ///  State fields for stateful widgets in this page.
 

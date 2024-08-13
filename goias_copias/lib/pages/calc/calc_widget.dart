@@ -5,6 +5,7 @@ import '/components/drawer_widget.dart';
 import '/components/footer_widget.dart';
 import '/components/header_line_widget.dart';
 import '/components/login_widget.dart';
+import '/components/pop_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -12,9 +13,11 @@ import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
 import 'calc_model.dart';
 export 'calc_model.dart';
 
@@ -42,6 +45,25 @@ class _CalcWidgetState extends State<CalcWidget> {
     super.initState();
     _model = createModel(context, () => CalcModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        enableDrag: false,
+        context: context,
+        builder: (context) {
+          return GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Padding(
+              padding: MediaQuery.viewInsetsOf(context),
+              child: PopWidget(),
+            ),
+          );
+        },
+      ).then((value) => safeSetState(() {}));
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -68,9 +90,9 @@ class _CalcWidgetState extends State<CalcWidget> {
               print('FloatingActionButton pressed ...');
             },
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            elevation: 8.0,
+            elevation: 8,
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -80,11 +102,11 @@ class _CalcWidgetState extends State<CalcWidget> {
                   await launchURL('https://wa.me/5562999338861');
                 },
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(24.0),
+                  borderRadius: BorderRadius.circular(24),
                   child: Image.asset(
                     'assets/images/19490735-logotipo-do-whatsapp-do-logotipo-do-icone-do-whatsapp-gratis-gratis-vetor.jpg',
-                    width: 300.0,
-                    height: 288.0,
+                    width: 300,
+                    height: 288,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -92,7 +114,7 @@ class _CalcWidgetState extends State<CalcWidget> {
             ),
           ),
           drawer: Drawer(
-            elevation: 16.0,
+            elevation: 16,
             child: wrapWithModel(
               model: _model.drawerModel,
               updateCallback: () => setState(() {}),
@@ -105,7 +127,7 @@ class _CalcWidgetState extends State<CalcWidget> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                width: 100.0,
+                width: 100,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
@@ -119,17 +141,16 @@ class _CalcWidgetState extends State<CalcWidget> {
                       tabletLandscape: false,
                     ))
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            40.0, 12.0, 40.0, 12.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(40, 12, 40, 12),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(8),
                               child: Image.asset(
                                 'assets/images/gois_cpias.gif',
-                                height: 80.0,
+                                height: 80,
                                 fit: BoxFit.contain,
                               ),
                             ),
@@ -141,7 +162,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                             ))
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    60.0, 10.0, 0.0, 0.0),
+                                    60, 10, 0, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -160,8 +181,8 @@ class _CalcWidgetState extends State<CalcWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 16.0,
-                                              letterSpacing: 0.0,
+                                              fontSize: 16,
+                                              letterSpacing: 0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -189,8 +210,8 @@ class _CalcWidgetState extends State<CalcWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 16.0,
-                                              letterSpacing: 0.0,
+                                              fontSize: 16,
+                                              letterSpacing: 0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -218,8 +239,8 @@ class _CalcWidgetState extends State<CalcWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 16.0,
-                                              letterSpacing: 0.0,
+                                              fontSize: 16,
+                                              letterSpacing: 0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -247,8 +268,8 @@ class _CalcWidgetState extends State<CalcWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 16.0,
-                                              letterSpacing: 0.0,
+                                              fontSize: 16,
+                                              letterSpacing: 0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -269,8 +290,8 @@ class _CalcWidgetState extends State<CalcWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 16.0,
-                                              letterSpacing: 0.0,
+                                              fontSize: 16,
+                                              letterSpacing: 0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -292,13 +313,13 @@ class _CalcWidgetState extends State<CalcWidget> {
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Montserrat',
-                                                fontSize: 16.0,
-                                                letterSpacing: 0.0,
+                                                fontSize: 16,
+                                                letterSpacing: 0,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),
                                       ),
-                                  ].divide(SizedBox(width: 20.0)),
+                                  ].divide(SizedBox(width: 20)),
                                 ),
                               ),
                             InkWell(
@@ -331,7 +352,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                       Icons.person,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      size: 24.0,
+                                      size: 24,
                                     ),
                                   ),
                                   if (currentUserEmail == null ||
@@ -343,12 +364,12 @@ class _CalcWidgetState extends State<CalcWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rajdhani',
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
+                                            fontSize: 16,
+                                            letterSpacing: 0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
-                                ].divide(SizedBox(width: 5.0)),
+                                ].divide(SizedBox(width: 5)),
                               ),
                             ),
                             InkWell(
@@ -367,7 +388,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                     Icons.shopping_cart,
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    size: 24.0,
+                                    size: 24,
                                   ),
                                   Text(
                                     'R\$ ${valueOrDefault<String>(
@@ -385,12 +406,12 @@ class _CalcWidgetState extends State<CalcWidget> {
                                           fontFamily: 'Rajdhani',
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
-                                          fontSize: 16.0,
-                                          letterSpacing: 0.0,
+                                          fontSize: 16,
+                                          letterSpacing: 0,
                                           fontWeight: FontWeight.w500,
                                         ),
                                   ),
-                                ].divide(SizedBox(width: 5.0)),
+                                ].divide(SizedBox(width: 5)),
                               ),
                             ),
                           ],
@@ -401,15 +422,14 @@ class _CalcWidgetState extends State<CalcWidget> {
                       desktop: false,
                     ))
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 12.0, 10.0, 12.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(10, 12, 10, 12),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 0.0, 10.0, 0.0),
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -422,18 +442,18 @@ class _CalcWidgetState extends State<CalcWidget> {
                                   Icons.menu,
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  size: 30.0,
+                                  size: 30,
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  60.0, 0.0, 0.0, 0.0),
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(60, 0, 0, 0),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(8),
                                 child: Image.asset(
                                   'assets/images/gois_cpias.gif',
-                                  height: 80.0,
+                                  height: 80,
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -446,7 +466,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                             ))
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    60.0, 10.0, 0.0, 0.0),
+                                    60, 10, 0, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -457,8 +477,8 @@ class _CalcWidgetState extends State<CalcWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rajdhani',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
+                                            fontSize: 22,
+                                            letterSpacing: 0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
@@ -469,8 +489,8 @@ class _CalcWidgetState extends State<CalcWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rajdhani',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
+                                            fontSize: 22,
+                                            letterSpacing: 0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
@@ -481,8 +501,8 @@ class _CalcWidgetState extends State<CalcWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rajdhani',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
+                                            fontSize: 22,
+                                            letterSpacing: 0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
@@ -493,17 +513,17 @@ class _CalcWidgetState extends State<CalcWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rajdhani',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
+                                            fontSize: 22,
+                                            letterSpacing: 0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
-                                  ].divide(SizedBox(width: 20.0)),
+                                  ].divide(SizedBox(width: 20)),
                                 ),
                               ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 10.0, 0.0),
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -543,7 +563,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                       Icons.person,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      size: 24.0,
+                                      size: 24,
                                     ),
                                   ),
                                   InkWell(
@@ -558,10 +578,10 @@ class _CalcWidgetState extends State<CalcWidget> {
                                       Icons.shopping_cart,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      size: 24.0,
+                                      size: 24,
                                     ),
                                   ),
-                                ].divide(SizedBox(width: 20.0)),
+                                ].divide(SizedBox(width: 20)),
                               ),
                             ),
                           ],
@@ -579,32 +599,31 @@ class _CalcWidgetState extends State<CalcWidget> {
                 child: Container(
                   decoration: BoxDecoration(),
                   child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 0.0, 10.0, 0.0),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Container(
-                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  width: MediaQuery.sizeOf(context).width,
                                   constraints: BoxConstraints(
-                                    minHeight: 550.0,
-                                    maxWidth: 800.0,
+                                    minHeight: 550,
+                                    maxWidth: 800,
                                   ),
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(20.0),
+                                    padding: EdgeInsets.all(20),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -613,10 +632,10 @@ class _CalcWidgetState extends State<CalcWidget> {
                                           children: [
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                  .fromSTEB(0, 5, 0, 0),
                                               child: Wrap(
-                                                spacing: 20.0,
-                                                runSpacing: 20.0,
+                                                spacing: 20,
+                                                runSpacing: 20,
                                                 alignment: WrapAlignment.start,
                                                 crossAxisAlignment:
                                                     WrapCrossAlignment.start,
@@ -628,7 +647,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                 clipBehavior: Clip.none,
                                                 children: [
                                                   Container(
-                                                    width: 400.0,
+                                                    width: 400,
                                                     decoration: BoxDecoration(),
                                                     child: Column(
                                                       mainAxisSize:
@@ -651,13 +670,13 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          8.0),
+                                                                          8),
                                                               child:
                                                                   Image.network(
                                                                 widget!.produto!
                                                                     .foto,
-                                                                width: 280.0,
-                                                                height: 200.0,
+                                                                width: 280,
+                                                                height: 200,
                                                                 fit: BoxFit
                                                                     .cover,
                                                               ),
@@ -666,10 +685,10 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          10.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          10,
+                                                                          0,
+                                                                          0),
                                                               child: Text(
                                                                 valueOrDefault<
                                                                     String>(
@@ -691,9 +710,9 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                               context)
                                                                           .primaryText,
                                                                       fontSize:
-                                                                          16.0,
+                                                                          16,
                                                                       letterSpacing:
-                                                                          0.0,
+                                                                          0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .normal,
@@ -704,10 +723,10 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Row(
                                                                 mainAxisSize:
                                                                     MainAxisSize
@@ -730,7 +749,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                             .bodyMedium
                                                                             .override(
                                                                               fontFamily: 'Montserrat',
-                                                                              letterSpacing: 0.0,
+                                                                              letterSpacing: 0,
                                                                             ),
                                                                       ),
                                                                       InkWell(
@@ -756,12 +775,12 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                           color:
                                                                               FlutterFlowTheme.of(context).primary,
                                                                           size:
-                                                                              24.0,
+                                                                              24,
                                                                         ),
                                                                       ),
                                                                     ].divide(SizedBox(
                                                                         width:
-                                                                            10.0)),
+                                                                            10)),
                                                                   ),
                                                                 ],
                                                               ),
@@ -770,10 +789,10 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          10.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          10,
+                                                                          0,
+                                                                          0),
                                                               child: Container(
                                                                 decoration:
                                                                     BoxDecoration(
@@ -782,15 +801,15 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              5.0),
+                                                                              5),
                                                                 ),
                                                                 child: Padding(
                                                                   padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          10.0,
-                                                                          10.0,
-                                                                          10.0,
-                                                                          10.0),
+                                                                          10,
+                                                                          10,
+                                                                          10,
+                                                                          10),
                                                                   child: Text(
                                                                     'O site calcula automaticamente a quantidade de páginas dos seus arquivos. Em alguns casos pode ser que o sistema não consiga ler algum arquivo pdf. Isso pode acontecer com arquivos protegidos por senha, corrompidos ou que tenham caracteres especiais no nome. Caso haja diferença, entre em contato através do nosso Whatsapp.',
                                                                     textAlign:
@@ -805,9 +824,9 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                           color:
                                                                               FlutterFlowTheme.of(context).primaryText,
                                                                           fontSize:
-                                                                              14.0,
+                                                                              14,
                                                                           letterSpacing:
-                                                                              0.0,
+                                                                              0,
                                                                           fontWeight:
                                                                               FontWeight.normal,
                                                                         ),
@@ -821,7 +840,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                     ),
                                                   ),
                                                   Container(
-                                                    width: 310.0,
+                                                    width: 310,
                                                     decoration: BoxDecoration(),
                                                     child: Column(
                                                       mainAxisSize:
@@ -840,7 +859,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                             Container(
                                                               constraints:
                                                                   BoxConstraints(
-                                                                minWidth: 350.0,
+                                                                minWidth: 350,
                                                               ),
                                                               decoration:
                                                                   BoxDecoration(),
@@ -862,9 +881,9 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                       fontFamily:
                                                                           'Montserrat',
                                                                       fontSize:
-                                                                          20.0,
+                                                                          20,
                                                                       letterSpacing:
-                                                                          0.0,
+                                                                          0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w600,
@@ -872,23 +891,20 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                               ),
                                                             ),
                                                           ].divide(SizedBox(
-                                                              height: 5.0)),
+                                                              height: 5)),
                                                         ),
                                                         Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      15.0,
-                                                                      0.0,
-                                                                      0.0),
+                                                                  .fromSTEB(0,
+                                                                      15, 0, 0),
                                                           child: Container(
-                                                            width: 300.0,
-                                                            height: 100.0,
+                                                            width: 300,
+                                                            height: 100,
                                                             child: custom_widgets
                                                                 .PdfUploader(
-                                                              width: 300.0,
-                                                              height: 100.0,
+                                                              width: 300,
+                                                              height: 100,
                                                               maxSizeInBytes:
                                                                   104857600,
                                                             ),
@@ -906,7 +922,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                 fontFamily:
                                                                     'Montserrat',
                                                                 letterSpacing:
-                                                                    0.0,
+                                                                    0,
                                                               ),
                                                         ),
                                                         Text(
@@ -918,17 +934,14 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                 fontFamily:
                                                                     'Montserrat',
                                                                 letterSpacing:
-                                                                    0.0,
+                                                                    0,
                                                               ),
                                                         ),
                                                         Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      15.0),
+                                                                  .fromSTEB(0,
+                                                                      0, 0, 15),
                                                           child: Text(
                                                             'Folhas: ${valueOrDefault<String>(
                                                               _model.folhas,
@@ -941,7 +954,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                   fontFamily:
                                                                       'Montserrat',
                                                                   letterSpacing:
-                                                                      0.0,
+                                                                      0,
                                                                 ),
                                                           ),
                                                         ),
@@ -968,7 +981,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                       shape:
                                                                           RoundedRectangleBorder(
                                                                         borderRadius:
-                                                                            BorderRadius.circular(4.0),
+                                                                            BorderRadius.circular(4),
                                                                       ),
                                                                     ),
                                                                     unselectedWidgetColor:
@@ -1018,9 +1031,9 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                         fontFamily:
                                                                             'Montserrat',
                                                                         fontSize:
-                                                                            16.0,
+                                                                            16,
                                                                         letterSpacing:
-                                                                            0.0,
+                                                                            0,
                                                                       ),
                                                                 ),
                                                               ],
@@ -1047,7 +1060,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                           shape:
                                                                               RoundedRectangleBorder(
                                                                             borderRadius:
-                                                                                BorderRadius.circular(4.0),
+                                                                                BorderRadius.circular(4),
                                                                           ),
                                                                         ),
                                                                         unselectedWidgetColor:
@@ -1094,18 +1107,18 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             fontSize:
-                                                                                16.0,
+                                                                                16,
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                           ),
                                                                     ),
                                                                   ],
                                                                 ),
                                                               ].divide(SizedBox(
-                                                                  width: 20.0)),
+                                                                  width: 20)),
                                                             ),
                                                           ].divide(SizedBox(
-                                                              width: 15.0)),
+                                                              width: 15)),
                                                         ),
                                                         Row(
                                                           mainAxisSize:
@@ -1124,8 +1137,8 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                   shape:
                                                                       RoundedRectangleBorder(
                                                                     borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            4.0),
+                                                                        BorderRadius
+                                                                            .circular(4),
                                                                   ),
                                                                 ),
                                                                 unselectedWidgetColor:
@@ -1169,13 +1182,13 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                     fontFamily:
                                                                         'Montserrat',
                                                                     fontSize:
-                                                                        16.0,
+                                                                        16,
                                                                     letterSpacing:
-                                                                        0.0,
+                                                                        0,
                                                                   ),
                                                             ),
                                                           ].divide(SizedBox(
-                                                              width: 0.0)),
+                                                              width: 0)),
                                                         ),
                                                         Row(
                                                           mainAxisSize:
@@ -1194,8 +1207,8 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                   shape:
                                                                       RoundedRectangleBorder(
                                                                     borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            4.0),
+                                                                        BorderRadius
+                                                                            .circular(4),
                                                                   ),
                                                                 ),
                                                                 unselectedWidgetColor:
@@ -1239,13 +1252,13 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                     fontFamily:
                                                                         'Montserrat',
                                                                     fontSize:
-                                                                        16.0,
+                                                                        16,
                                                                     letterSpacing:
-                                                                        0.0,
+                                                                        0,
                                                                   ),
                                                             ),
                                                           ].divide(SizedBox(
-                                                              width: 0.0)),
+                                                              width: 0)),
                                                         ),
                                                         Row(
                                                           mainAxisSize:
@@ -1270,7 +1283,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                       shape:
                                                                           RoundedRectangleBorder(
                                                                         borderRadius:
-                                                                            BorderRadius.circular(4.0),
+                                                                            BorderRadius.circular(4),
                                                                       ),
                                                                     ),
                                                                     unselectedWidgetColor:
@@ -1326,15 +1339,15 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                         fontFamily:
                                                                             'Montserrat',
                                                                         fontSize:
-                                                                            16.0,
+                                                                            16,
                                                                         letterSpacing:
-                                                                            0.0,
+                                                                            0,
                                                                       ),
                                                                 ),
                                                               ],
                                                             ),
                                                           ].divide(SizedBox(
-                                                              width: 15.0)),
+                                                              width: 15)),
                                                         ),
                                                         if (valueOrDefault<
                                                             bool>(
@@ -1351,10 +1364,10 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0,
-                                                                            0.0),
+                                                                            0,
+                                                                            10,
+                                                                            0,
+                                                                            0),
                                                                 child: Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
@@ -1369,9 +1382,9 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             fontSize:
-                                                                                16.0,
+                                                                                16,
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                           ),
                                                                     ),
                                                                   ],
@@ -1394,7 +1407,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                         shape:
                                                                             RoundedRectangleBorder(
                                                                           borderRadius:
-                                                                              BorderRadius.circular(4.0),
+                                                                              BorderRadius.circular(4),
                                                                         ),
                                                                       ),
                                                                       unselectedWidgetColor:
@@ -1458,9 +1471,9 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                           fontFamily:
                                                                               'Montserrat',
                                                                           fontSize:
-                                                                              16.0,
+                                                                              16,
                                                                           letterSpacing:
-                                                                              0.0,
+                                                                              0,
                                                                         ),
                                                                   ),
                                                                 ],
@@ -1482,7 +1495,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                         shape:
                                                                             RoundedRectangleBorder(
                                                                           borderRadius:
-                                                                              BorderRadius.circular(4.0),
+                                                                              BorderRadius.circular(4),
                                                                         ),
                                                                       ),
                                                                       unselectedWidgetColor:
@@ -1539,9 +1552,9 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                           fontFamily:
                                                                               'Montserrat',
                                                                           fontSize:
-                                                                              16.0,
+                                                                              16,
                                                                           letterSpacing:
-                                                                              0.0,
+                                                                              0,
                                                                         ),
                                                                   ),
                                                                 ],
@@ -1550,10 +1563,10 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0,
-                                                                            0.0),
+                                                                            0,
+                                                                            10,
+                                                                            0,
+                                                                            0),
                                                                 child: Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
@@ -1568,9 +1581,9 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             fontSize:
-                                                                                16.0,
+                                                                                16,
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                           ),
                                                                     ),
                                                                   ],
@@ -1580,10 +1593,10 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            0.0,
-                                                                            5.0,
-                                                                            0.0,
-                                                                            0.0),
+                                                                            0,
+                                                                            5,
+                                                                            0,
+                                                                            0),
                                                                 child: Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
@@ -1601,7 +1614,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                           shape:
                                                                               RoundedRectangleBorder(
                                                                             borderRadius:
-                                                                                BorderRadius.circular(4.0),
+                                                                                BorderRadius.circular(4),
                                                                           ),
                                                                         ),
                                                                         unselectedWidgetColor:
@@ -1653,19 +1666,19 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                     ClipRRect(
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              0.0),
+                                                                              0),
                                                                       child: Image
                                                                           .asset(
                                                                         'assets/images/vertical.png',
                                                                         width:
-                                                                            50.0,
+                                                                            50,
                                                                         height:
-                                                                            60.0,
+                                                                            60,
                                                                         fit: BoxFit
                                                                             .contain,
                                                                         alignment: Alignment(
-                                                                            0.0,
-                                                                            1.0),
+                                                                            0,
+                                                                            1),
                                                                       ),
                                                                     ),
                                                                     Text(
@@ -1677,14 +1690,15 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             fontSize:
-                                                                                16.0,
+                                                                                16,
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                           ),
                                                                     ),
-                                                                  ].divide(SizedBox(
-                                                                      width:
-                                                                          5.0)),
+                                                                  ].divide(
+                                                                      SizedBox(
+                                                                          width:
+                                                                              5)),
                                                                 ),
                                                               ),
                                                               Row(
@@ -1704,7 +1718,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                         shape:
                                                                             RoundedRectangleBorder(
                                                                           borderRadius:
-                                                                              BorderRadius.circular(4.0),
+                                                                              BorderRadius.circular(4),
                                                                         ),
                                                                       ),
                                                                       unselectedWidgetColor:
@@ -1774,15 +1788,14 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                   ),
                                                                   ClipRRect(
                                                                     borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            0.0),
+                                                                        BorderRadius
+                                                                            .circular(0),
                                                                     child: Image
                                                                         .asset(
                                                                       'assets/images/horizontal.png',
-                                                                      width:
-                                                                          65.0,
+                                                                      width: 65,
                                                                       height:
-                                                                          45.0,
+                                                                          45,
                                                                       fit: BoxFit
                                                                           .contain,
                                                                     ),
@@ -1796,26 +1809,27 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                           fontFamily:
                                                                               'Montserrat',
                                                                           fontSize:
-                                                                              16.0,
+                                                                              16,
                                                                           letterSpacing:
-                                                                              0.0,
+                                                                              0,
                                                                         ),
                                                                   ),
-                                                                ].divide(SizedBox(
-                                                                    width:
-                                                                        5.0)),
+                                                                ].divide(
+                                                                    SizedBox(
+                                                                        width:
+                                                                            5)),
                                                               ),
                                                             ].divide(SizedBox(
-                                                                height: 5.0)),
+                                                                height: 5)),
                                                           ),
                                                         Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(
-                                                                      0.0,
-                                                                      10.0,
-                                                                      0.0,
-                                                                      10.0),
+                                                                      0,
+                                                                      10,
+                                                                      0,
+                                                                      10),
                                                           child: InkWell(
                                                             splashColor: Colors
                                                                 .transparent,
@@ -1950,25 +1964,26 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Montserrat',
-                                                                                letterSpacing: 0.0,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                         ),
                                                                       ],
                                                                     ),
-                                                                  ].divide(SizedBox(
-                                                                      width:
-                                                                          20.0)),
+                                                                  ].divide(
+                                                                      SizedBox(
+                                                                          width:
+                                                                              20)),
                                                                 ),
                                                                 Icon(
                                                                   Icons.refresh,
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
-                                                                  size: 24.0,
+                                                                  size: 24,
                                                                 ),
                                                               ].divide(SizedBox(
-                                                                  width: 10.0)),
+                                                                  width: 10)),
                                                             ),
                                                           ),
                                                         ),
@@ -1995,9 +2010,9 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                               .override(
                                                                 fontFamily:
                                                                     'Montserrat',
-                                                                fontSize: 16.0,
+                                                                fontSize: 16,
                                                                 letterSpacing:
-                                                                    0.0,
+                                                                    0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w600,
@@ -2006,11 +2021,8 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                         Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      10.0,
-                                                                      0.0,
-                                                                      0.0),
+                                                                  .fromSTEB(0,
+                                                                      10, 0, 0),
                                                           child: FFButtonWidget(
                                                             onPressed:
                                                                 () async {
@@ -2106,7 +2118,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                               String>(
                                                                         _model
                                                                             .vertical,
-                                                                        '-',
+                                                                        'Vertical',
                                                                       ),
                                                                       dividido:
                                                                           valueOrDefault<
@@ -2295,21 +2307,21 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                 'Adicionar ao carrinho',
                                                             options:
                                                                 FFButtonOptions(
-                                                              height: 40.0,
+                                                              height: 40,
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          24.0,
-                                                                          0.0,
-                                                                          24.0,
-                                                                          0.0),
+                                                                          24,
+                                                                          0,
+                                                                          24,
+                                                                          0),
                                                               iconPadding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          0),
                                                               color: FlutterFlowTheme
                                                                       .of(context)
                                                                   .primary,
@@ -2323,24 +2335,24 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                         color: Colors
                                                                             .white,
                                                                         letterSpacing:
-                                                                            0.0,
+                                                                            0,
                                                                       ),
-                                                              elevation: 3.0,
+                                                              elevation: 3,
                                                               borderSide:
                                                                   BorderSide(
                                                                 color: Colors
                                                                     .transparent,
-                                                                width: 1.0,
+                                                                width: 1,
                                                               ),
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          8.0),
+                                                                          8),
                                                             ),
                                                           ),
                                                         ),
-                                                      ].divide(SizedBox(
-                                                          height: 5.0)),
+                                                      ].divide(
+                                                          SizedBox(height: 5)),
                                                     ),
                                                   ),
                                                 ],
@@ -2357,20 +2369,20 @@ class _CalcWidgetState extends State<CalcWidget> {
                           ),
                           if (MediaQuery.sizeOf(context).height >= 980.0)
                             Container(
-                              width: 100.0,
-                              height: 135.0,
+                              width: 100,
+                              height: 135,
                               decoration: BoxDecoration(),
                             ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 10.0, 0.0, 0.0),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                             child: wrapWithModel(
                               model: _model.footerModel,
                               updateCallback: () => setState(() {}),
                               child: FooterWidget(),
                             ),
                           ),
-                        ].divide(SizedBox(height: 20.0)),
+                        ].divide(SizedBox(height: 20)),
                       ),
                     ),
                   ),

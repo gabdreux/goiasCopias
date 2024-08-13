@@ -21,7 +21,7 @@ class PixMercadoPagoCall {
     String? identificationType = 'CPF',
     String? numberCpf = '',
     String? accessToken =
-        'TEST-2812750792539524-012023-1673c430d7fafaf0fa2a9eafeed1cf4b-209864133',
+        'APP_USR-8811327718643098-072511-fc6b47bd26787d625ecb0388c3f2d1c1-1917874318',
     String? stringrandomica = 'adfpijaps-dnasipdnasio-pdnadfo',
     String? description = 'Descrição',
     String? paymentMethonId = 'pix',
@@ -119,8 +119,8 @@ class CardToTokenCall {
     String? identificationType = 'CPF',
     String? identificationNumber = '',
     String? accessToken =
-        'TEST-2812750792539524-012023-1673c430d7fafaf0fa2a9eafeed1cf4b-209864133',
-    String? publicKey = 'TEST-33b1b684-83d1-4f5f-9235-24e0645270f2',
+        'APP_USR-8811327718643098-072511-fc6b47bd26787d625ecb0388c3f2d1c1-1917874318',
+    String? publicKey = 'APP_USR-b9290bb6-5606-443c-8622-73d0d9e23468',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -181,7 +181,7 @@ class StatusPagamentoCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization':
-            'Bearer TEST-2812750792539524-012023-1673c430d7fafaf0fa2a9eafeed1cf4b-209864133',
+            'Bearer APP_USR-8811327718643098-072511-fc6b47bd26787d625ecb0388c3f2d1c1-1917874318',
       },
       params: {},
       returnBody: true,
@@ -221,7 +221,7 @@ class CCMercadoPagoCall {
     String? federalUnit = '',
     String? description = '',
     String? accessToken =
-        'TEST-2812750792539524-012023-1673c430d7fafaf0fa2a9eafeed1cf4b-209864133',
+        'APP_USR-8811327718643098-072511-fc6b47bd26787d625ecb0388c3f2d1c1-1917874318',
     int? installments = 1,
   }) async {
     final ffApiRequestBody = '''
@@ -312,7 +312,7 @@ class CCMercadoPagoCall {
 class CalculadoraDeFreteCall {
   static Future<ApiCallResponse> call({
     String? accessToken =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNWQzNjUxNmEyN2MzNTAxZGU4ZjdiMmJjNGYxMmNhZGYwNzI3MGIyZWY3ODMzODkzOTE3ZjlhMjNhZTUwMWM3MDc2ZGM4Zjg4NmViN2Q4ZTMiLCJpYXQiOjE3MjMwNzQ0ODMuMDIyMTgxLCJuYmYiOjE3MjMwNzQ0ODMuMDIyMTg1LCJleHAiOjE3NTQ2MTA0ODMuMDAxODAxLCJzdWIiOiIzNDg5ZThmNS0zMjY3LTRmM2MtOTQ5Yy0xZDZlZTVlNmU2YTIiLCJzY29wZXMiOlsic2hpcHBpbmctY2FsY3VsYXRlIl19.cnitIAA99uTxFMHq2WqwwyDHbf9NbkQrFOPjLJhw5_wJ2PLeZ352OkYRh8Ll6ExQPZqTqbJpaUpFaTkr-FTwXAjmv5aIrsB-H2esRciNbn7p8DuhOvM7Dno0l4w6gBT29q2YfBaTEo_w1TqrAqBWNMkWnnyy3u8Duh5j7qWqV3t-nb2YjLG6E3ReFDLUCveqDR5g7_ZEBsdHvdzkwSdy5SlwEnOOSJh9LhWlSErMli3AHUAQ2AZw65hI5QUlSPmP-TZ8UZlzdJ5rGrXomYYm6NFrFao8ySzeb8VJ64SzFsgWXg08cTcWIQDFJkR_ZYIC-I-4Wr9RzJ5QqGCRyuvrjRUBmY9vYAopPOb7vVjHzZOXWvZPqZI3AoICzUYY8T2S5ef3AuFby63JvLLYtsPxoC36AMYxeMmYf0h2Mrnlz8fHOC0lSuhD9iF84-LSqtaatnbhbCNbnXZ6cB7EWFYG2Wd355-Xuq107jqvQBSKwhvf1wB7d3fMT-CNeb8tXNazg4hjooDRXYa8HLK9Hmpq3WTYw-1LO04A3OWYhZaS2ovGsXNBW6zycjGpYCaV2zTl5CwRvGcw0WaXyi-Lp4bSGLsEzs6UAQsBlBYhntSYFS3pnOsSZs7kbaNepfWRntEZt_Hr7AGY-KxBsi4FK20KiYUUMkvwy__um2LpVEpFdTg',
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjkyY2JhMDliMmEyZmUwMzUyNzUyMTc5NTcyNzJhNTZmYzAwNzg3YmM3ZGY2NTViY2NhZDNkNDM4NzI1Njk0NmNmOWVkMWZlMzY0Y2EyNDQiLCJpYXQiOjE3MjE5MjQyNTEuOTU4OTk1LCJuYmYiOjE3MjE5MjQyNTEuOTU4OTk3LCJleHAiOjE3NTM0NjAyNTEuOTM4MjM1LCJzdWIiOiI5Yzk5Zjg1MC1mMWE5LTQ5YjctYmI2Mi03NTVhNzA2MGFjN2YiLCJzY29wZXMiOlsic2hpcHBpbmctY2FsY3VsYXRlIl19.3usHjHB44jJMZm-m_Uj_WFcdDAPWWTnmYwxTvKJjiQWwcN_L9c34cie1KX9OAMMfQYcgijYbEgY-RZqvN53HAi3yo3c2ascfseH_0SoQ2ZaQpcHu9uVYZglgy1d17FIJN-X2swjIC2iB4hM0TNBJfkJbxSt0PnfBzZAqKBv8wDFXk7-s2uZg-9ODrh390i6aynwMup0A3s_u55eC0QFd1FdFA67HoKe6Cw_YE_WvAmPsMEOgqc6yBhmqq3N4S8X85HrcrWInv5VPwWvpwkhcsULL3v7fz3PGvBnSwIrscNTX_ZlUtCDmZY3gUGGkuqkAwSAxO-iBDCFBcO4bemuX245RMGYmebRWP0Q3VywvEz7kULm2EC7SBnqHIOsOJYm_OLkBxgLPNoKJVd6EqZzaJ990mTe1T3N0xo1aBaGGxKQWWI6wJNVh_iSUFbK8KBlTuJk8PBJfs5nPaPXbNXrwoz7RD8lZxI5-MVuxyAOC5Qo9QPq4xbMswSnSNRCb50fxOY529XJ4TE3zt3nLwYbA2jhwAg026eoWjDDULu_p22dO1cfFWgvqKRlzOqtJHJpBBfw56j2kUmtAzZccA2U50lIohbY8cke5jbwdy-65FXXLgOXRP33eJZ94Gw8eBE8XiEM-Fmt2jpjhZ7b6Uqw4NZgmWw_CKmVROofCLGxOfr0',
     String? cep,
     double? altura,
     double? largura,

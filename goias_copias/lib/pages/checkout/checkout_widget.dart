@@ -18,9 +18,11 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
 import 'checkout_model.dart';
 export 'checkout_model.dart';
 
@@ -45,6 +47,46 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CheckoutModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.addToParcelamento('1x - R\$${valueOrDefault<String>(
+        formatNumber(
+          FFAppState().CarrinhoState.totalTotal,
+          formatType: FormatType.decimal,
+          decimalType: DecimalType.commaDecimal,
+        ),
+        '0',
+      )}');
+      setState(() {});
+      _model.addToParcelamento('2x - R\$${formatNumber(
+        double.parse(((valueOrDefault<double>(
+                      FFAppState().CarrinhoState.totalTotal,
+                      0.0,
+                    ) *
+                    (1 + 0.0253) *
+                    (1 + 0.0253)) /
+                2)
+            .toStringAsFixed(2)),
+        formatType: FormatType.decimal,
+        decimalType: DecimalType.commaDecimal,
+      )}');
+      setState(() {});
+      _model.addToParcelamento('3x - R\$${formatNumber(
+        double.parse(((valueOrDefault<double>(
+                      FFAppState().CarrinhoState.totalTotal,
+                      0.0,
+                    ) *
+                    (1 + 0.0462) *
+                    (1 + 0.0462) *
+                    (1 + 0.0462)) /
+                3)
+            .toStringAsFixed(2)),
+        formatType: FormatType.decimal,
+        decimalType: DecimalType.commaDecimal,
+      )}');
+      setState(() {});
+    });
 
     _model.textFieldNomeTextController ??=
         TextEditingController(text: currentUserDisplayName);
@@ -135,9 +177,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
               print('FloatingActionButton pressed ...');
             },
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            elevation: 8.0,
+            elevation: 8,
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -147,11 +189,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                   await launchURL('https://wa.me/5562999338861');
                 },
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(24.0),
+                  borderRadius: BorderRadius.circular(24),
                   child: Image.asset(
                     'assets/images/19490735-logotipo-do-whatsapp-do-logotipo-do-icone-do-whatsapp-gratis-gratis-vetor.jpg',
-                    width: 300.0,
-                    height: 288.0,
+                    width: 300,
+                    height: 288,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -159,7 +201,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
             ),
           ),
           drawer: Drawer(
-            elevation: 16.0,
+            elevation: 16,
             child: wrapWithModel(
               model: _model.drawerModel,
               updateCallback: () => setState(() {}),
@@ -172,7 +214,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                width: 100.0,
+                width: 100,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
@@ -186,17 +228,16 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                       tabletLandscape: false,
                     ))
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            40.0, 12.0, 40.0, 12.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(40, 12, 40, 12),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(8),
                               child: Image.asset(
                                 'assets/images/gois_cpias.gif',
-                                height: 80.0,
+                                height: 80,
                                 fit: BoxFit.contain,
                               ),
                             ),
@@ -208,7 +249,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                             ))
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    60.0, 10.0, 0.0, 0.0),
+                                    60, 10, 0, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -227,8 +268,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 16.0,
-                                              letterSpacing: 0.0,
+                                              fontSize: 16,
+                                              letterSpacing: 0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -256,8 +297,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 16.0,
-                                              letterSpacing: 0.0,
+                                              fontSize: 16,
+                                              letterSpacing: 0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -285,8 +326,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 16.0,
-                                              letterSpacing: 0.0,
+                                              fontSize: 16,
+                                              letterSpacing: 0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -314,8 +355,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 16.0,
-                                              letterSpacing: 0.0,
+                                              fontSize: 16,
+                                              letterSpacing: 0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -336,8 +377,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 16.0,
-                                              letterSpacing: 0.0,
+                                              fontSize: 16,
+                                              letterSpacing: 0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -359,13 +400,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Montserrat',
-                                                fontSize: 16.0,
-                                                letterSpacing: 0.0,
+                                                fontSize: 16,
+                                                letterSpacing: 0,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),
                                       ),
-                                  ].divide(SizedBox(width: 20.0)),
+                                  ].divide(SizedBox(width: 20)),
                                 ),
                               ),
                             InkWell(
@@ -398,7 +439,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                       Icons.person,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      size: 24.0,
+                                      size: 24,
                                     ),
                                   ),
                                   if (currentUserEmail == null ||
@@ -410,12 +451,12 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rajdhani',
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
+                                            fontSize: 16,
+                                            letterSpacing: 0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
-                                ].divide(SizedBox(width: 5.0)),
+                                ].divide(SizedBox(width: 5)),
                               ),
                             ),
                             InkWell(
@@ -434,7 +475,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                     Icons.shopping_cart,
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    size: 24.0,
+                                    size: 24,
                                   ),
                                   Text(
                                     'R\$ ${valueOrDefault<String>(
@@ -452,12 +493,12 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                           fontFamily: 'Rajdhani',
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
-                                          fontSize: 16.0,
-                                          letterSpacing: 0.0,
+                                          fontSize: 16,
+                                          letterSpacing: 0,
                                           fontWeight: FontWeight.w500,
                                         ),
                                   ),
-                                ].divide(SizedBox(width: 5.0)),
+                                ].divide(SizedBox(width: 5)),
                               ),
                             ),
                           ],
@@ -468,15 +509,14 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                       desktop: false,
                     ))
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 12.0, 10.0, 12.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(10, 12, 10, 12),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 0.0, 10.0, 0.0),
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -489,18 +529,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                   Icons.menu,
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  size: 30.0,
+                                  size: 30,
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  60.0, 0.0, 0.0, 0.0),
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(60, 0, 0, 0),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(8),
                                 child: Image.asset(
                                   'assets/images/gois_cpias.gif',
-                                  height: 80.0,
+                                  height: 80,
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -513,7 +553,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                             ))
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    60.0, 10.0, 0.0, 0.0),
+                                    60, 10, 0, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -524,8 +564,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rajdhani',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
+                                            fontSize: 22,
+                                            letterSpacing: 0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
@@ -536,8 +576,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rajdhani',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
+                                            fontSize: 22,
+                                            letterSpacing: 0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
@@ -548,8 +588,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rajdhani',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
+                                            fontSize: 22,
+                                            letterSpacing: 0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
@@ -560,17 +600,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Rajdhani',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
+                                            fontSize: 22,
+                                            letterSpacing: 0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
-                                  ].divide(SizedBox(width: 20.0)),
+                                  ].divide(SizedBox(width: 20)),
                                 ),
                               ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 10.0, 0.0),
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -610,7 +650,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                       Icons.person,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      size: 24.0,
+                                      size: 24,
                                     ),
                                   ),
                                   InkWell(
@@ -625,10 +665,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                       Icons.shopping_cart,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      size: 24.0,
+                                      size: 24,
                                     ),
                                   ),
-                                ].divide(SizedBox(width: 20.0)),
+                                ].divide(SizedBox(width: 20)),
                               ),
                             ),
                           ],
@@ -651,23 +691,23 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 20.0, 10.0, 0.0),
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(10, 20, 10, 0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Container(
-                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                width: MediaQuery.sizeOf(context).width,
                                 constraints: BoxConstraints(
-                                  maxWidth: 800.0,
+                                  maxWidth: 800,
                                 ),
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(20.0),
+                                  padding: EdgeInsets.all(20),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -675,8 +715,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Wrap(
-                                            spacing: 20.0,
-                                            runSpacing: 20.0,
+                                            spacing: 20,
+                                            runSpacing: 20,
                                             alignment: WrapAlignment.start,
                                             crossAxisAlignment:
                                                 WrapCrossAlignment.start,
@@ -697,18 +737,15 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                     Container(
                                                       constraints:
                                                           BoxConstraints(
-                                                        maxWidth: 400.0,
+                                                        maxWidth: 400,
                                                       ),
                                                       decoration:
                                                           BoxDecoration(),
                                                       child: Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    20.0,
-                                                                    0.0,
-                                                                    20.0,
-                                                                    20.0),
+                                                                .fromSTEB(20, 0,
+                                                                    20, 20),
                                                         child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -724,10 +761,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            20.0),
+                                                                            0,
+                                                                            0,
+                                                                            0,
+                                                                            20),
                                                                 child: Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
@@ -745,9 +782,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             fontSize:
-                                                                                14.0,
+                                                                                14,
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.normal,
                                                                           ),
@@ -800,15 +837,16 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             .bodyMedium
                                                                             .override(
                                                                               fontFamily: 'Montserrat',
-                                                                              fontSize: 14.0,
-                                                                              letterSpacing: 0.0,
+                                                                              fontSize: 14,
+                                                                              letterSpacing: 0,
                                                                               fontWeight: FontWeight.w600,
                                                                             ),
                                                                       ),
                                                                     ),
-                                                                  ].divide(SizedBox(
-                                                                      width:
-                                                                          10.0)),
+                                                                  ].divide(
+                                                                      SizedBox(
+                                                                          width:
+                                                                              10)),
                                                                 ),
                                                               ),
                                                             Row(
@@ -828,9 +866,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         fontFamily:
                                                                             'Montserrat',
                                                                         fontSize:
-                                                                            18.0,
+                                                                            18,
                                                                         letterSpacing:
-                                                                            0.0,
+                                                                            0,
                                                                         fontWeight:
                                                                             FontWeight.w600,
                                                                       ),
@@ -841,14 +879,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -867,7 +904,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width: 90.0,
+                                                                    width: 90,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -879,7 +916,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -889,17 +926,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           AuthUserStreamWidget(
                                                                         builder:
@@ -919,17 +957,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 true,
                                                                             labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             enabledBorder:
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -940,7 +978,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -951,7 +989,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -962,7 +1000,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -974,8 +1012,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
+                                                                                fontSize: 16,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                           validator: _model
@@ -992,14 +1030,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -1018,7 +1055,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width: 90.0,
+                                                                    width: 90,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -1030,7 +1067,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -1040,17 +1077,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           AuthUserStreamWidget(
                                                                         builder:
@@ -1070,17 +1108,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 true,
                                                                             labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             enabledBorder:
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1091,7 +1129,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1102,7 +1140,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1113,7 +1151,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1125,8 +1163,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
+                                                                                fontSize: 16,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                           validator: _model
@@ -1143,14 +1181,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -1169,7 +1206,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width: 90.0,
+                                                                    width: 90,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -1181,7 +1218,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -1191,17 +1228,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           AuthUserStreamWidget(
                                                                         builder:
@@ -1221,17 +1259,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 true,
                                                                             labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             enabledBorder:
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1242,7 +1280,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1253,7 +1291,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1264,7 +1302,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1276,8 +1314,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
+                                                                                fontSize: 16,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                           validator: _model
@@ -1294,14 +1332,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -1320,7 +1357,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width: 90.0,
+                                                                    width: 90,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -1332,7 +1369,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -1342,17 +1379,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           TextFormField(
                                                                         controller:
@@ -1371,20 +1409,20 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .labelMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                letterSpacing: 0.0,
+                                                                                letterSpacing: 0,
                                                                               ),
                                                                           hintStyle: FlutterFlowTheme.of(context)
                                                                               .labelMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                letterSpacing: 0.0,
+                                                                                letterSpacing: 0,
                                                                               ),
                                                                           enabledBorder:
                                                                               UnderlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).alternate,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
                                                                                 const BorderRadius.only(
@@ -1397,7 +1435,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).primary,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
                                                                                 const BorderRadius.only(
@@ -1410,7 +1448,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).error,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
                                                                                 const BorderRadius.only(
@@ -1423,7 +1461,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).error,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
                                                                                 const BorderRadius.only(
@@ -1436,8 +1474,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             .bodyMedium
                                                                             .override(
                                                                               fontFamily: 'Inter',
-                                                                              fontSize: 16.0,
-                                                                              letterSpacing: 0.0,
+                                                                              fontSize: 16,
+                                                                              letterSpacing: 0,
                                                                               fontWeight: FontWeight.w500,
                                                                             ),
                                                                         validator: _model
@@ -1453,14 +1491,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -1479,7 +1516,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width: 90.0,
+                                                                    width: 90,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -1491,7 +1528,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -1501,17 +1538,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           AuthUserStreamWidget(
                                                                         builder:
@@ -1531,17 +1569,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 true,
                                                                             labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             enabledBorder:
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1552,7 +1590,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1563,7 +1601,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1574,7 +1612,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1586,8 +1624,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
+                                                                                fontSize: 16,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                           validator: _model
@@ -1607,18 +1645,15 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                     Container(
                                                       constraints:
                                                           BoxConstraints(
-                                                        maxWidth: 400.0,
+                                                        maxWidth: 400,
                                                       ),
                                                       decoration:
                                                           BoxDecoration(),
                                                       child: Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    20.0,
-                                                                    0.0,
-                                                                    20.0,
-                                                                    20.0),
+                                                                .fromSTEB(20, 0,
+                                                                    20, 20),
                                                         child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -1643,9 +1678,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         fontFamily:
                                                                             'Montserrat',
                                                                         fontSize:
-                                                                            18.0,
+                                                                            18,
                                                                         letterSpacing:
-                                                                            0.0,
+                                                                            0,
                                                                         fontWeight:
                                                                             FontWeight.w600,
                                                                       ),
@@ -1656,14 +1691,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -1682,8 +1716,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width:
-                                                                        110.0,
+                                                                    width: 110,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -1695,7 +1728,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -1705,17 +1738,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           AuthUserStreamWidget(
                                                                         builder:
@@ -1735,17 +1769,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 true,
                                                                             labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             enabledBorder:
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1756,7 +1790,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1767,7 +1801,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1778,7 +1812,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1790,8 +1824,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
+                                                                                fontSize: 16,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                           validator: _model
@@ -1808,14 +1842,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -1834,8 +1867,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width:
-                                                                        110.0,
+                                                                    width: 110,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -1847,7 +1879,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -1857,17 +1889,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           AuthUserStreamWidget(
                                                                         builder:
@@ -1887,17 +1920,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 true,
                                                                             labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             enabledBorder:
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1908,7 +1941,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1919,7 +1952,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1930,7 +1963,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -1942,8 +1975,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
+                                                                                fontSize: 16,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                           validator: _model
@@ -1960,14 +1993,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -1986,8 +2018,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width:
-                                                                        110.0,
+                                                                    width: 110,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -1999,7 +2030,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -2009,17 +2040,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           AuthUserStreamWidget(
                                                                         builder:
@@ -2039,17 +2071,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 true,
                                                                             labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             enabledBorder:
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2060,7 +2092,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2071,7 +2103,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2082,7 +2114,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2094,8 +2126,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
+                                                                                fontSize: 16,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                           validator: _model
@@ -2112,14 +2144,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -2138,8 +2169,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width:
-                                                                        110.0,
+                                                                    width: 110,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -2151,7 +2181,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -2161,17 +2191,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           AuthUserStreamWidget(
                                                                         builder:
@@ -2191,17 +2222,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 true,
                                                                             labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             enabledBorder:
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2212,7 +2243,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2223,7 +2254,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2234,7 +2265,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2246,8 +2277,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
+                                                                                fontSize: 16,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                           validator: _model
@@ -2264,14 +2295,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -2290,8 +2320,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width:
-                                                                        110.0,
+                                                                    width: 110,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -2303,7 +2332,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -2313,17 +2342,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           AuthUserStreamWidget(
                                                                         builder:
@@ -2343,17 +2373,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 true,
                                                                             labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             enabledBorder:
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2364,7 +2394,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2375,7 +2405,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2386,7 +2416,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2398,8 +2428,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
+                                                                                fontSize: 16,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                           validator: _model
@@ -2416,14 +2446,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -2442,8 +2471,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width:
-                                                                        110.0,
+                                                                    width: 110,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -2455,7 +2483,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -2465,17 +2493,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           AuthUserStreamWidget(
                                                                         builder:
@@ -2495,17 +2524,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 true,
                                                                             labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             enabledBorder:
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2516,7 +2545,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2527,7 +2556,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2538,7 +2567,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2550,8 +2579,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
+                                                                                fontSize: 16,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                           validator: _model
@@ -2568,14 +2597,13 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          20,
+                                                                          0,
+                                                                          0),
                                                               child: Wrap(
-                                                                spacing: 0.0,
-                                                                runSpacing:
-                                                                    15.0,
+                                                                spacing: 0,
+                                                                runSpacing: 15,
                                                                 alignment:
                                                                     WrapAlignment
                                                                         .start,
@@ -2594,8 +2622,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     Clip.none,
                                                                 children: [
                                                                   Container(
-                                                                    width:
-                                                                        110.0,
+                                                                    width: 110,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child: Text(
@@ -2607,7 +2634,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w500,
                                                                           ),
@@ -2617,17 +2644,18 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     constraints:
                                                                         BoxConstraints(
                                                                       maxWidth:
-                                                                          700.0,
+                                                                          700,
                                                                     ),
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           AuthUserStreamWidget(
                                                                         builder:
@@ -2647,17 +2675,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 true,
                                                                             labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                   fontFamily: 'Inter',
-                                                                                  letterSpacing: 0.0,
+                                                                                  letterSpacing: 0,
                                                                                 ),
                                                                             enabledBorder:
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).alternate,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2668,7 +2696,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).primary,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2679,7 +2707,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2690,7 +2718,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                                 UnderlineInputBorder(
                                                                               borderSide: BorderSide(
                                                                                 color: FlutterFlowTheme.of(context).error,
-                                                                                width: 2.0,
+                                                                                width: 2,
                                                                               ),
                                                                               borderRadius: const BorderRadius.only(
                                                                                 topLeft: Radius.circular(4.0),
@@ -2702,8 +2730,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                fontSize: 16.0,
-                                                                                letterSpacing: 0.0,
+                                                                                fontSize: 16,
+                                                                                letterSpacing: 0,
                                                                                 fontWeight: FontWeight.w500,
                                                                               ),
                                                                           validator: _model
@@ -2724,25 +2752,23 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                 ),
                                               ),
                                               Container(
-                                                width: 310.0,
+                                                width: 310,
                                                 decoration: BoxDecoration(
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryBackground,
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
+                                                      BorderRadius.circular(8),
                                                   border: Border.all(
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .alternate,
-                                                    width: 1.0,
+                                                    width: 1,
                                                   ),
                                                 ),
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(20.0, 20.0,
-                                                          20.0, 20.0),
+                                                      .fromSTEB(20, 20, 20, 20),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -2753,11 +2779,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    5.0),
+                                                                .fromSTEB(10, 0,
+                                                                    0, 5),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -2774,9 +2797,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     fontFamily:
                                                                         'Montserrat',
                                                                     fontSize:
-                                                                        14.0,
+                                                                        14,
                                                                     letterSpacing:
-                                                                        0.0,
+                                                                        0,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600,
@@ -2791,11 +2814,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    5.0),
+                                                                .fromSTEB(10, 0,
+                                                                    0, 5),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -2827,9 +2847,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                       fontFamily:
                                                                           'Montserrat',
                                                                       fontSize:
-                                                                          14.0,
+                                                                          14,
                                                                       letterSpacing:
-                                                                          0.0,
+                                                                          0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .normal,
@@ -2860,9 +2880,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     fontFamily:
                                                                         'Montserrat',
                                                                     fontSize:
-                                                                        14.0,
+                                                                        14,
                                                                     letterSpacing:
-                                                                        0.0,
+                                                                        0,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .normal,
@@ -2874,11 +2894,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    5.0),
+                                                                .fromSTEB(10, 0,
+                                                                    0, 5),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -2910,9 +2927,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                       fontFamily:
                                                                           'Montserrat',
                                                                       fontSize:
-                                                                          14.0,
+                                                                          14,
                                                                       letterSpacing:
-                                                                          0.0,
+                                                                          0,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .normal,
@@ -2943,9 +2960,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     fontFamily:
                                                                         'Montserrat',
                                                                     fontSize:
-                                                                        14.0,
+                                                                        14,
                                                                     letterSpacing:
-                                                                        0.0,
+                                                                        0,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .normal,
@@ -2955,7 +2972,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                         ),
                                                       ),
                                                       Divider(
-                                                        thickness: 1.0,
+                                                        thickness: 1,
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -2964,11 +2981,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    5.0),
+                                                                .fromSTEB(10, 0,
+                                                                    0, 5),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -2988,9 +3002,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     fontFamily:
                                                                         'Montserrat',
                                                                     fontSize:
-                                                                        14.0,
+                                                                        14,
                                                                     letterSpacing:
-                                                                        0.0,
+                                                                        0,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .normal,
@@ -3020,9 +3034,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     fontFamily:
                                                                         'Montserrat',
                                                                     fontSize:
-                                                                        14.0,
+                                                                        14,
                                                                     letterSpacing:
-                                                                        0.0,
+                                                                        0,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600,
@@ -3034,11 +3048,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    10.0,
-                                                                    0.0,
-                                                                    10.0),
+                                                                .fromSTEB(0, 10,
+                                                                    0, 10),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -3047,10 +3058,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          5.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          10.0),
+                                                                          5,
+                                                                          0,
+                                                                          0,
+                                                                          10),
                                                               child:
                                                                   FlutterFlowRadioButton(
                                                                 options: [
@@ -3073,7 +3084,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             String>(
                                                                         'Pix'),
                                                                 optionHeight:
-                                                                    32.0,
+                                                                    32,
                                                                 textStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .labelMedium
@@ -3081,7 +3092,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                       fontFamily:
                                                                           'Inter',
                                                                       letterSpacing:
-                                                                          0.0,
+                                                                          0,
                                                                     ),
                                                                 selectedTextStyle:
                                                                     FlutterFlowTheme.of(
@@ -3091,7 +3102,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                           fontFamily:
                                                                               'Inter',
                                                                           letterSpacing:
-                                                                              0.0,
+                                                                              0,
                                                                         ),
                                                                 buttonPosition:
                                                                     RadioButtonPosition
@@ -3137,10 +3148,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            10.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            5.0),
+                                                                            10,
+                                                                            0,
+                                                                            0,
+                                                                            5),
                                                                 child: Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
@@ -3158,9 +3169,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                             fontFamily:
                                                                                 'Montserrat',
                                                                             fontSize:
-                                                                                14.0,
+                                                                                14,
                                                                             letterSpacing:
-                                                                                0.0,
+                                                                                0,
                                                                             fontWeight:
                                                                                 FontWeight.w600,
                                                                           ),
@@ -3172,10 +3183,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            8.0,
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0),
+                                                                            8,
+                                                                            0,
+                                                                            8,
+                                                                            0),
                                                                 child:
                                                                     TextFormField(
                                                                   controller: _model
@@ -3197,7 +3208,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                           fontFamily:
                                                                               'Inter',
                                                                           letterSpacing:
-                                                                              0.0,
+                                                                              0,
                                                                         ),
                                                                     alignLabelWithHint:
                                                                         false,
@@ -3210,7 +3221,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                           fontFamily:
                                                                               'Inter',
                                                                           letterSpacing:
-                                                                              0.0,
+                                                                              0,
                                                                         ),
                                                                     enabledBorder:
                                                                         OutlineInputBorder(
@@ -3219,11 +3230,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .alternate,
                                                                         width:
-                                                                            2.0,
+                                                                            2,
                                                                       ),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              8.0),
+                                                                              8),
                                                                     ),
                                                                     focusedBorder:
                                                                         OutlineInputBorder(
@@ -3232,11 +3243,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .primary,
                                                                         width:
-                                                                            2.0,
+                                                                            2,
                                                                       ),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              8.0),
+                                                                              8),
                                                                     ),
                                                                     errorBorder:
                                                                         OutlineInputBorder(
@@ -3245,11 +3256,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .error,
                                                                         width:
-                                                                            2.0,
+                                                                            2,
                                                                       ),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              8.0),
+                                                                              8),
                                                                     ),
                                                                     focusedErrorBorder:
                                                                         OutlineInputBorder(
@@ -3258,11 +3269,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .error,
                                                                         width:
-                                                                            2.0,
+                                                                            2,
                                                                       ),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              8.0),
+                                                                              8),
                                                                     ),
                                                                   ),
                                                                   style: FlutterFlowTheme.of(
@@ -3272,7 +3283,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         fontFamily:
                                                                             'Inter',
                                                                         letterSpacing:
-                                                                            0.0,
+                                                                            0,
                                                                       ),
                                                                   maxLength: 16,
                                                                   validator: _model
@@ -3285,10 +3296,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            8.0,
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0),
+                                                                            8,
+                                                                            0,
+                                                                            8,
+                                                                            0),
                                                                 child:
                                                                     TextFormField(
                                                                   controller: _model
@@ -3310,7 +3321,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                           fontFamily:
                                                                               'Inter',
                                                                           letterSpacing:
-                                                                              0.0,
+                                                                              0,
                                                                         ),
                                                                     hintText:
                                                                         'Nome',
@@ -3321,7 +3332,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                           fontFamily:
                                                                               'Inter',
                                                                           letterSpacing:
-                                                                              0.0,
+                                                                              0,
                                                                         ),
                                                                     enabledBorder:
                                                                         OutlineInputBorder(
@@ -3330,11 +3341,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .alternate,
                                                                         width:
-                                                                            2.0,
+                                                                            2,
                                                                       ),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              8.0),
+                                                                              8),
                                                                     ),
                                                                     focusedBorder:
                                                                         OutlineInputBorder(
@@ -3343,11 +3354,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .primary,
                                                                         width:
-                                                                            2.0,
+                                                                            2,
                                                                       ),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              8.0),
+                                                                              8),
                                                                     ),
                                                                     errorBorder:
                                                                         OutlineInputBorder(
@@ -3356,11 +3367,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .error,
                                                                         width:
-                                                                            2.0,
+                                                                            2,
                                                                       ),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              8.0),
+                                                                              8),
                                                                     ),
                                                                     focusedErrorBorder:
                                                                         OutlineInputBorder(
@@ -3369,11 +3380,11 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .error,
                                                                         width:
-                                                                            2.0,
+                                                                            2,
                                                                       ),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              8.0),
+                                                                              8),
                                                                     ),
                                                                   ),
                                                                   style: FlutterFlowTheme.of(
@@ -3383,7 +3394,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         fontFamily:
                                                                             'Inter',
                                                                         letterSpacing:
-                                                                            0.0,
+                                                                            0,
                                                                       ),
                                                                   validator: _model
                                                                       .textFieldNomeCartaoTextControllerValidator
@@ -3397,16 +3408,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         .max,
                                                                 children: [
                                                                   Container(
-                                                                    width: 70.0,
+                                                                    width: 70,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           TextFormField(
                                                                         controller:
@@ -3425,7 +3437,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .labelMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                letterSpacing: 0.0,
+                                                                                letterSpacing: 0,
                                                                               ),
                                                                           hintText:
                                                                               '00',
@@ -3433,54 +3445,54 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .labelMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                letterSpacing: 0.0,
+                                                                                letterSpacing: 0,
                                                                               ),
                                                                           enabledBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).alternate,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                           focusedBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).primary,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                           errorBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).error,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                           focusedErrorBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).error,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                         ),
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
                                                                               fontFamily: 'Inter',
-                                                                              letterSpacing: 0.0,
+                                                                              letterSpacing: 0,
                                                                             ),
                                                                         textAlign:
                                                                             TextAlign.center,
@@ -3493,16 +3505,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     ),
                                                                   ),
                                                                   Container(
-                                                                    width: 90.0,
+                                                                    width: 90,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           TextFormField(
                                                                         controller:
@@ -3521,7 +3534,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .labelMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                letterSpacing: 0.0,
+                                                                                letterSpacing: 0,
                                                                               ),
                                                                           hintText:
                                                                               '0000',
@@ -3529,54 +3542,54 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .labelMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                letterSpacing: 0.0,
+                                                                                letterSpacing: 0,
                                                                               ),
                                                                           enabledBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).alternate,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                           focusedBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).primary,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                           errorBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).error,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                           focusedErrorBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).error,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                         ),
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
                                                                               fontFamily: 'Inter',
-                                                                              letterSpacing: 0.0,
+                                                                              letterSpacing: 0,
                                                                             ),
                                                                         textAlign:
                                                                             TextAlign.center,
@@ -3589,16 +3602,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     ),
                                                                   ),
                                                                   Container(
-                                                                    width: 90.0,
+                                                                    width: 90,
                                                                     decoration:
                                                                         BoxDecoration(),
                                                                     child:
                                                                         Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              8,
+                                                                              0,
+                                                                              8,
+                                                                              0),
                                                                       child:
                                                                           TextFormField(
                                                                         controller:
@@ -3617,7 +3631,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .labelMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                letterSpacing: 0.0,
+                                                                                letterSpacing: 0,
                                                                               ),
                                                                           hintText:
                                                                               '***',
@@ -3625,54 +3639,54 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                               .labelMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
-                                                                                letterSpacing: 0.0,
+                                                                                letterSpacing: 0,
                                                                               ),
                                                                           enabledBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).alternate,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                           focusedBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).primary,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                           errorBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).error,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                           focusedErrorBorder:
                                                                               OutlineInputBorder(
                                                                             borderSide:
                                                                                 BorderSide(
                                                                               color: FlutterFlowTheme.of(context).error,
-                                                                              width: 2.0,
+                                                                              width: 2,
                                                                             ),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(8.0),
+                                                                                BorderRadius.circular(8),
                                                                           ),
                                                                         ),
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
                                                                               fontFamily: 'Inter',
-                                                                              letterSpacing: 0.0,
+                                                                              letterSpacing: 0,
                                                                             ),
                                                                         textAlign:
                                                                             TextAlign.center,
@@ -3690,10 +3704,10 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            8.0,
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0),
+                                                                            8,
+                                                                            0,
+                                                                            8,
+                                                                            0),
                                                                 child:
                                                                     FlutterFlowDropDown<
                                                                         int>(
@@ -3706,21 +3720,17 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                       int>.from([
                                                                     1,
                                                                     2,
-                                                                    3,
-                                                                    4
+                                                                    3
                                                                   ]),
-                                                                  optionLabels: [
-                                                                    '1x',
-                                                                    '2x',
-                                                                    '3x',
-                                                                    '4x'
-                                                                  ],
+                                                                  optionLabels:
+                                                                      _model
+                                                                          .parcelamento,
                                                                   onChanged: (val) =>
                                                                       setState(() =>
                                                                           _model.dropDownParcelasValue =
                                                                               val),
-                                                                  width: 300.0,
-                                                                  height: 56.0,
+                                                                  width: 300,
+                                                                  height: 56,
                                                                   textStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium
@@ -3728,7 +3738,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         fontFamily:
                                                                             'Inter',
                                                                         letterSpacing:
-                                                                            0.0,
+                                                                            0,
                                                                       ),
                                                                   hintText:
                                                                       'Selecione as parcelas',
@@ -3738,27 +3748,26 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .secondaryText,
-                                                                    size: 24.0,
+                                                                    size: 24,
                                                                   ),
                                                                   fillColor: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryBackground,
-                                                                  elevation:
-                                                                      2.0,
+                                                                  elevation: 2,
                                                                   borderColor:
                                                                       FlutterFlowTheme.of(
                                                                               context)
                                                                           .alternate,
                                                                   borderWidth:
-                                                                      2.0,
+                                                                      2,
                                                                   borderRadius:
-                                                                      8.0,
+                                                                      8,
                                                                   margin: EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          16.0,
-                                                                          4.0,
-                                                                          16.0,
-                                                                          4.0),
+                                                                          16,
+                                                                          4,
+                                                                          16,
+                                                                          4),
                                                                   hidesUnderline:
                                                                       true,
                                                                   isOverButton:
@@ -3770,7 +3779,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                 ),
                                                               ),
                                                             ].divide(SizedBox(
-                                                                height: 20.0)),
+                                                                height: 20)),
                                                           ),
                                                         ),
                                                       ),
@@ -3831,6 +3840,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     .textFieldCpfTextController
                                                                     .text,
                                                               );
+
                                                               _shouldSetState =
                                                                   true;
                                                               if ((_model.outPix
@@ -3956,6 +3966,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                         .textFieldCpfTextController
                                                                         .text,
                                                               );
+
                                                               _shouldSetState =
                                                                   true;
                                                               if ((_model
@@ -4021,6 +4032,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     1,
                                                                   ),
                                                                 );
+
                                                                 _shouldSetState =
                                                                     true;
                                                                 if ((_model
@@ -4091,6 +4103,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                 return;
                                                               }
                                                             }
+
                                                             if ((_model.ccOUT
                                                                         ?.succeeded ??
                                                                     true) ||
@@ -4310,6 +4323,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                       return;
                                                                     }
                                                                   }
+
                                                                   _model.addToPdfsURL(
                                                                       _model
                                                                           .uploadedFileUrl);
@@ -4321,6 +4335,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                   setState(
                                                                       () {});
                                                                 }
+
                                                                 var pedidoInfosRecordReference =
                                                                     PedidoInfosRecord.createDoc(_model
                                                                         .pedido!
@@ -4635,6 +4650,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                 GoRouter.of(
                                                                         context)
                                                                     .prepareAuthEvent();
+
                                                                 final user =
                                                                     await authManager
                                                                         .signInWithEmail(
@@ -4649,6 +4665,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     null) {
                                                                   return;
                                                                 }
+
                                                                 await currentUserReference!
                                                                     .update({
                                                                   ...mapToFirestore(
@@ -4662,6 +4679,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                     },
                                                                   ),
                                                                 });
+
                                                                 await _model
                                                                     .pedido!
                                                                     .reference
@@ -4685,10 +4703,12 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                                   ),
                                                                 });
                                                               }
+
                                                               context.goNamedAuth(
                                                                   'Obrigado',
                                                                   context
                                                                       .mounted);
+
                                                               FFAppState()
                                                                       .CarrinhoState =
                                                                   CarrinhoStruct();
@@ -4746,7 +4766,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                                                         ),
                                                       ),
                                                     ].divide(
-                                                        SizedBox(height: 10.0)),
+                                                        SizedBox(height: 10)),
                                                   ),
                                                 ),
                                               ),
@@ -4766,7 +4786,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                           updateCallback: () => setState(() {}),
                           child: FooterWidget(),
                         ),
-                      ].divide(SizedBox(height: 20.0)),
+                      ].divide(SizedBox(height: 20)),
                     ),
                   ),
                 ),

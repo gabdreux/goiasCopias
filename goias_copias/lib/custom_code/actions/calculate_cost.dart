@@ -107,9 +107,9 @@ Future<dynamic> calculateCost(List<FFUploadedFile> pdfs, bool isColored,
   }
 
   double totalCost = printingCost + bindingCost;
-  //if (totalCost < 20.00) {
-  //   totalCost = 20.00;
-//  }
+  if (totalCost < 20.00) {
+    totalCost = 20.00;
+  }
 
   double totalWeight =
       fileDetails.fold(0.0, (sum, file) => sum + file['weight']);
