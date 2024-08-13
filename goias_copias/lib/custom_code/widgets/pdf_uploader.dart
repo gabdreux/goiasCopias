@@ -15,6 +15,8 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 class PdfUploader extends StatefulWidget {
   const PdfUploader({
     super.key,
@@ -31,15 +33,24 @@ class PdfUploader extends StatefulWidget {
   State<PdfUploader> createState() => _PdfUploaderState();
 }
 
-class _PdfUploaderState extends State<PdfUploader> {
+class _PdfUploaderState extends State<PdfUploader>
+    with AutomaticKeepAliveClientMixin {
   List<Uint8List>? selectedBytes;
   List<String>? selectedFileNames;
   void Function(Uint8List bytes)? onPdfSelected;
   void Function()? onPdfRemoved;
+  bool isProcessing = false;
+
+  @override
+  bool get wantKeepAlive => true;
 
   Future<void> _selectFile() async {
     try {
       print('Tentando selecionar arquivo(s)...');
+      setState(() {
+        isProcessing = true; // Começa o processamento
+      });
+
       final result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
         allowedExtensions: ['pdf'],
@@ -76,22 +87,29 @@ class _PdfUploaderState extends State<PdfUploader> {
           selectedFileNames = fileNames;
         });
 
-        _updateFFAppState();
+        await _updateFFAppState(); // Aguarda a atualização do estado
+        print(
+            'Todos os arquivos PDF foram adicionados com sucesso ao FFAppState');
       } else {
         print('Nenhum arquivo selecionado');
       }
     } catch (e) {
       print('Erro ao selecionar arquivo: $e');
+    } finally {
+      setState(() {
+        isProcessing = false; // Finaliza o processamento
+      });
     }
   }
 
-  void _updateFFAppState() {
+  Future<void> _updateFFAppState() async {
     if (selectedBytes != null && selectedBytes!.isNotEmpty) {
       final base64Strings =
           selectedBytes!.map((bytes) => base64Encode(bytes)).toList();
-      final base64Concatenated = base64Strings.join(', ');
+      final base64Concatenated =
+          base64Strings.join(', '); // Corrigido para base64Concatenated
       FFAppState().pdfString = base64Concatenated;
-      print('Base64 concatenado: $base64Concatenated');
+      // print('Base64 concatenado: $base64Concatenated');
     } else {
       FFAppState().pdfString = "null";
       print(
@@ -103,7 +121,7 @@ class _PdfUploaderState extends State<PdfUploader> {
     setState(() {
       selectedBytes!.removeAt(index);
       selectedFileNames!.removeAt(index);
-      _updateFFAppState();
+      _updateFFAppState(); // Atualiza o estado após remoção
     });
 
     if (onPdfRemoved != null) {
@@ -113,6 +131,7 @@ class _PdfUploaderState extends State<PdfUploader> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // Necessário ao usar AutomaticKeepAliveClientMixin
     print('Construindo widget PdfUploader');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,6 +190,10 @@ class _PdfUploaderState extends State<PdfUploader> {
                   if (selectedFileNames == null || selectedFileNames!.isEmpty)
                     Center(
                       child: Text('Selecione os arquivos.'),
+                    ),
+                  if (isProcessing) // Exibe o CircularProgressIndicator
+                    Center(
+                      child: CircularProgressIndicator(),
                     ),
                 ],
               ),

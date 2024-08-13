@@ -3,9 +3,9 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "27cdf196f0d549e0c97d1bf3983474aa",
-"assets/AssetManifest.bin.json": "3e2c336237bec072317242dc0a8381d0",
-"assets/AssetManifest.json": "b4bc2ca8e84ed2263e7ffe6da4c2b445",
+const RESOURCES = {"assets/AssetManifest.bin": "c7b3b7a943b1fcbefec8169be654c105",
+"assets/AssetManifest.bin.json": "d33a849efb47dadc4d2f6cff74269d90",
+"assets/AssetManifest.json": "5054c1518841bdadc494ba16d2911a35",
 "assets/assets/audios/favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "assets/assets/fonts/favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "assets/assets/fonts/Montserrat-Medium.ttf": "b3ba703c591edd4aad57f8f4561a287b",
@@ -23,6 +23,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "27cdf196f0d549e0c97d1bf3983474aa
 "assets/assets/images/steptodown.com762907.jpg": "71e1ddf63c43ee4851f9fed8f069fe81",
 "assets/assets/images/steptodown.com811142.jpg": "bdf85cb7f6a82b8591b331d496288ece",
 "assets/assets/images/vertical.png": "6e6a44cc3f49c375a46a0f8a8dbb2fd1",
+"assets/assets/lottie_animations/Animation%2520-%25201723570070163.json": "ac382b07c81ebc57e72ecf89bd544029",
 "assets/assets/lottie_animations/favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "assets/assets/pdfs/favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "assets/assets/rive_animations/favicon.png": "5dcef449791fa27946b3d35ad8803796",
@@ -49,12 +50,12 @@ const RESOURCES = {"assets/AssetManifest.bin": "27cdf196f0d549e0c97d1bf3983474aa
 "Captura_de_tela_2024-07-18_161031.png": "2ce1b8b0986945244415b0115fcfd067",
 "favicon.png": "2704101cb06ce66e2000356a312be25c",
 "flutter.js": "f31737fb005cd3a3c6bd9355efd33061",
-"flutter_bootstrap.js": "7b9f1daea45653f1311010d0aebed7c9",
+"flutter_bootstrap.js": "468d443e6d7aa355fd02b16da472b4ca",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "6f147cc32d422bbce5e562e1baed87f5",
-"/": "6f147cc32d422bbce5e562e1baed87f5",
-"main.dart.js": "d8b7e4a0169f017f19b19e1761a1da3a",
+"index.html": "7d40fbf187eedd80bed3119d0411eb58",
+"/": "7d40fbf187eedd80bed3119d0411eb58",
+"main.dart.js": "86d9cd6a7914eadd5528cd4871e4e83d",
 "version.json": "7dd8fd488bdbbc4f18b3fecee45109ad"};
 // The application shell files that are downloaded before a service worker can
 // start.

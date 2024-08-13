@@ -1,0 +1,24 @@
+2024/08/13-17:34:07.445 4544 Reusing MANIFEST C:\Users\User\AppData\Local\Temp\flutter_tools.b5ce511b\flutter_tools_chrome_device.70bb5ebb\Default\IndexedDB\https_goiascopias.com.br_0.indexeddb.leveldb/MANIFEST-000001
+2024/08/13-17:34:07.446 4544 Recovering log #7
+2024/08/13-17:34:07.446 4544 Reusing old log C:\Users\User\AppData\Local\Temp\flutter_tools.b5ce511b\flutter_tools_chrome_device.70bb5ebb\Default\IndexedDB\https_goiascopias.com.br_0.indexeddb.leveldb/000007.log 
+2024/08/13-17:34:07.473 306c Level-0 table #11: started
+2024/08/13-17:34:07.483 306c Level-0 table #11: 932 bytes OK
+2024/08/13-17:34:07.489 306c Delete type=0 #7
+2024/08/13-17:34:07.490 5c Manual compaction at level-0 from '\x00\x05\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at '\x00\x05\x00\x00\x05' @ 165 : 1
+2024/08/13-17:34:07.490 5c Compacting 1@0 + 1@1 files
+2024/08/13-17:34:07.494 5c Generated table #12@0: 46 keys, 1426 bytes
+2024/08/13-17:34:07.494 5c Compacted 1@0 + 1@1 files => 1426 bytes
+2024/08/13-17:34:07.500 5c compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/08/13-17:34:07.501 5c Delete type=2 #11
+2024/08/13-17:34:07.501 5c Manual compaction at level-0 from '\x00\x05\x00\x00\x05' @ 165 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/08/13-17:43:11.927 306c Level-0 table #14: started
+2024/08/13-17:43:11.933 306c Level-0 table #14: 943 bytes OK
+2024/08/13-17:43:11.937 306c Delete type=2 #8
+2024/08/13-17:43:11.937 306c Delete type=0 #10
+2024/08/13-17:43:11.938 4544 Manual compaction at level-0 from '\x00\x06\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at '\x00\x06\x00\x00\x05' @ 198 : 1
+2024/08/13-17:43:11.938 4544 Compacting 1@0 + 1@1 files
+2024/08/13-17:43:11.940 4544 Generated table #15@0: 53 keys, 1512 bytes
+2024/08/13-17:43:11.940 4544 Compacted 1@0 + 1@1 files => 1512 bytes
+2024/08/13-17:43:11.944 4544 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/08/13-17:43:11.944 4544 Delete type=2 #14
+2024/08/13-17:43:11.945 4544 Manual compaction at level-0 from '\x00\x06\x00\x00\x05' @ 198 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at (end)
