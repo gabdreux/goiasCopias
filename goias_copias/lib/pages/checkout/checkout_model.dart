@@ -70,6 +70,15 @@ class CheckoutModel extends FlutterFlowModel<CheckoutWidget> {
   void updateParcelamentoAtIndex(int index, Function(String) updateFn) =>
       parcelamento[index] = updateFn(parcelamento[index]);
 
+  List<FFUploadedFile> ffasfasfadf = [];
+  void addToFfasfasfadf(FFUploadedFile item) => ffasfasfadf.add(item);
+  void removeFromFfasfasfadf(FFUploadedFile item) => ffasfasfadf.remove(item);
+  void removeAtIndexFromFfasfasfadf(int index) => ffasfasfadf.removeAt(index);
+  void insertAtIndexInFfasfasfadf(int index, FFUploadedFile item) =>
+      ffasfasfadf.insert(index, item);
+  void updateFfasfasfadfAtIndex(int index, Function(FFUploadedFile) updateFn) =>
+      ffasfasfadf[index] = updateFn(ffasfasfadf[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final formKey2 = GlobalKey<FormState>();

@@ -14,7 +14,7 @@ import 'package:hive/hive.dart';
 Future<void> clearPdfCache() async {
   try {
     // Abre o box Hive para PDFs
-    var box = await Hive.openBox<Uint8List>('pdfscache');
+    var box = await Hive.openBox<Uint8List>('carrinhocache');
 
     // Limpa todos os itens armazenados no box
     await box.clear();
