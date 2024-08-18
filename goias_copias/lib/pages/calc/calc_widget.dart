@@ -2022,11 +2022,19 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                         Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      10, 0, 0),
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      10.0,
+                                                                      0.0,
+                                                                      0.0),
                                                           child: FFButtonWidget(
                                                             onPressed:
                                                                 () async {
+                                                              var _shouldSetState =
+                                                                  false;
+                                                              unawaited(
+                                                                () async {}(),
+                                                              );
                                                               if (_model
                                                                       .valorDouble <=
                                                                   0.0) {
@@ -2051,6 +2059,9 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                     );
                                                                   },
                                                                 );
+                                                                if (_shouldSetState)
+                                                                  setState(
+                                                                      () {});
                                                                 return;
                                                               }
                                                               _model.visivel =
@@ -2097,9 +2108,16 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                   );
                                                                   setState(
                                                                       () {});
+                                                                  await actions
+                                                                      .addBytesToCart();
                                                                 }),
                                                                 Future(
                                                                     () async {
+                                                                  _model.pathsCacheCarrinho =
+                                                                      await actions
+                                                                          .returnPathsCache();
+                                                                  _shouldSetState =
+                                                                      true;
                                                                   FFAppState()
                                                                       .updateCarrinhoStateStruct(
                                                                     (e) => e
@@ -2179,7 +2197,7 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                             0,
                                                                           ),
                                                                           pDFs:
-                                                                              FFAppState().pdfStringList,
+                                                                              _model.pathsCacheCarrinho,
                                                                           subTotal:
                                                                               getJsonField(
                                                                             _model.out,
@@ -2274,31 +2292,32 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                         0.0,
                                                                       )),
                                                                   );
-
-                                                                  context.pushNamed(
+                                                                  context.goNamed(
                                                                       'Carrinho');
                                                                 }),
                                                               ]);
+                                                              if (_shouldSetState)
+                                                                setState(() {});
                                                             },
                                                             text:
                                                                 'Adicionar ao carrinho',
                                                             options:
                                                                 FFButtonOptions(
-                                                              height: 40,
+                                                              height: 40.0,
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          24,
-                                                                          0,
-                                                                          24,
-                                                                          0),
+                                                                          24.0,
+                                                                          0.0,
+                                                                          24.0,
+                                                                          0.0),
                                                               iconPadding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          0,
-                                                                          0),
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
                                                               color: FlutterFlowTheme
                                                                       .of(context)
                                                                   .primary,
@@ -2312,19 +2331,19 @@ class _CalcWidgetState extends State<CalcWidget> {
                                                                         color: Colors
                                                                             .white,
                                                                         letterSpacing:
-                                                                            0,
+                                                                            0.0,
                                                                       ),
-                                                              elevation: 3,
+                                                              elevation: 3.0,
                                                               borderSide:
                                                                   BorderSide(
                                                                 color: Colors
                                                                     .transparent,
-                                                                width: 1,
+                                                                width: 1.0,
                                                               ),
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          8),
+                                                                          8.0),
                                                             ),
                                                           ),
                                                         ),

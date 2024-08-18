@@ -9,3 +9,6 @@ export 'base_to_byte.dart' show baseToByte;
 export 'card_token.dart' show cardToken;
 export 'create_new_user.dart' show createNewUser;
 export 'saveOnCache.dart' show saveOnCache;
+export 'returnPathsCache.dart' show returnPathsCache;
+export 'clearPdfCache.dart' show clearPdfCache;
+export 'addBytesToCart.dart' show addBytesToCart;
