@@ -3,7 +3,7 @@ import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom actions
+import '/custom_code/actions/index.dart'; // Imports other custom actions
 import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom action code
@@ -11,30 +11,32 @@ import 'package:flutter/material.dart';
 
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:hive/hive.dart';
 
 Future<List<FFUploadedFile>> baseToByte() async {
-  String base64String = FFAppState().pdfString;
+  // Abre a caixa Hive para PDFs
+  var box = await Hive.openBox<Uint8List>('PDFsCache');
 
-  // Separa a string Base64 por vírgula
-  List<String> base64List = base64String.split(', ');
-
-  FFAppState().pdfStringList = base64List;
+  // Recupera todas as chaves (nomes dos arquivos) armazenadas na caixa
+  List<String> keys = box.keys.cast<String>().toList();
 
   // Cria a lista de FFUploadedFile
   List<FFUploadedFile> uploadedFiles = [];
 
-  for (String base64 in base64List) {
-    // Decodifica a string Base64 para bytes
-    Uint8List bytes = base64Decode(base64);
+  for (String key in keys) {
+    // Recupera os bytes do PDF armazenado no Hive
+    Uint8List? bytes = box.get(key);
 
-    // Cria o FFUploadedFile a partir dos bytes
-    FFUploadedFile uploadedFile = FFUploadedFile(
-      bytes: bytes,
-      name:
-          'filename_${base64List.indexOf(base64)}.pdf', // Nome dinâmico para cada arquivo
-    );
+    if (bytes != null) {
+      // Cria o FFUploadedFile a partir dos bytes
+      FFUploadedFile uploadedFile = FFUploadedFile(
+        bytes: bytes,
+        name:
+            key, // Usa o nome original do arquivo como o nome do FFUploadedFile
+      );
 
-    uploadedFiles.add(uploadedFile);
+      uploadedFiles.add(uploadedFile);
+    }
   }
 
   return uploadedFiles;

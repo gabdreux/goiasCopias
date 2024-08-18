@@ -3,7 +3,7 @@ import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
+import '/custom_code/widgets/index.dart'; // Imports other custom widgets
 import '/custom_code/actions/index.dart'; // Imports custom actions
 import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
@@ -15,7 +15,8 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
 
 class PdfUploader extends StatefulWidget {
   const PdfUploader({
@@ -33,24 +34,26 @@ class PdfUploader extends StatefulWidget {
   State<PdfUploader> createState() => _PdfUploaderState();
 }
 
-class _PdfUploaderState extends State<PdfUploader>
-    with AutomaticKeepAliveClientMixin {
+class _PdfUploaderState extends State<PdfUploader> {
   List<Uint8List>? selectedBytes;
   List<String>? selectedFileNames;
   void Function(Uint8List bytes)? onPdfSelected;
   void Function()? onPdfRemoved;
-  bool isProcessing = false;
 
   @override
-  bool get wantKeepAlive => true;
+  void initState() {
+    super.initState();
+    _initializeHive();
+  }
+
+  Future<void> _initializeHive() async {
+    // Abre a caixa do Hive para PDFs
+    await Hive.openBox<Uint8List>('PDFsCache');
+  }
 
   Future<void> _selectFile() async {
     try {
       print('Tentando selecionar arquivo(s)...');
-      setState(() {
-        isProcessing = true; // Começa o processamento
-      });
-
       final result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
         allowedExtensions: ['pdf'],
@@ -58,6 +61,9 @@ class _PdfUploaderState extends State<PdfUploader>
       );
 
       if (result != null && result.files.isNotEmpty) {
+        var box = Hive.box<Uint8List>('PDFsCache');
+        await box.clear();
+
         final List<Uint8List> bytesList = [];
         final List<String> fileNames = [];
 
@@ -77,6 +83,10 @@ class _PdfUploaderState extends State<PdfUploader>
             }
             bytesList.add(file.bytes!);
             fileNames.add(file.name);
+
+            // Armazenar o PDF em Hive
+            var box = Hive.box<Uint8List>('PDFsCache');
+            await box.put(file.name, file.bytes!);
           } else {
             print('Nenhum arquivo selecionado');
           }
@@ -87,29 +97,20 @@ class _PdfUploaderState extends State<PdfUploader>
           selectedFileNames = fileNames;
         });
 
-        await _updateFFAppState(); // Aguarda a atualização do estado
-        print(
-            'Todos os arquivos PDF foram adicionados com sucesso ao FFAppState');
+        _updateFFAppState();
       } else {
         print('Nenhum arquivo selecionado');
       }
     } catch (e) {
       print('Erro ao selecionar arquivo: $e');
-    } finally {
-      setState(() {
-        isProcessing = false; // Finaliza o processamento
-      });
     }
   }
 
-  Future<void> _updateFFAppState() async {
+  void _updateFFAppState() {
     if (selectedBytes != null && selectedBytes!.isNotEmpty) {
-      final base64Strings =
-          selectedBytes!.map((bytes) => base64Encode(bytes)).toList();
-      final base64Concatenated =
-          base64Strings.join(', '); // Corrigido para base64Concatenated
-      FFAppState().pdfString = base64Concatenated;
-      // print('Base64 concatenado: $base64Concatenated');
+      // Aqui, estamos atualizando o estado diretamente sem usar base64
+      FFAppState().pdfString = "PDFs armazenados no cache.";
+      print('PDFs armazenados no cache.');
     } else {
       FFAppState().pdfString = "null";
       print(
@@ -117,21 +118,28 @@ class _PdfUploaderState extends State<PdfUploader>
     }
   }
 
-  void _removeFile(int index) {
-    setState(() {
-      selectedBytes!.removeAt(index);
-      selectedFileNames!.removeAt(index);
-      _updateFFAppState(); // Atualiza o estado após remoção
-    });
+  void _removeFile(int index) async {
+    if (selectedBytes != null && selectedFileNames != null) {
+      final fileName = selectedFileNames![index];
 
-    if (onPdfRemoved != null) {
-      onPdfRemoved!();
+      // Remover o PDF do Hive
+      var box = Hive.box<Uint8List>('PDFsCache');
+      await box.delete(fileName);
+
+      setState(() {
+        selectedBytes!.removeAt(index);
+        selectedFileNames!.removeAt(index);
+        _updateFFAppState();
+      });
+
+      if (onPdfRemoved != null) {
+        onPdfRemoved!();
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context); // Necessário ao usar AutomaticKeepAliveClientMixin
     print('Construindo widget PdfUploader');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,10 +198,6 @@ class _PdfUploaderState extends State<PdfUploader>
                   if (selectedFileNames == null || selectedFileNames!.isEmpty)
                     Center(
                       child: Text('Selecione os arquivos.'),
-                    ),
-                  if (isProcessing) // Exibe o CircularProgressIndicator
-                    Center(
-                      child: CircularProgressIndicator(),
                     ),
                 ],
               ),

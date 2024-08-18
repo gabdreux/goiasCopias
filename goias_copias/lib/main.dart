@@ -15,6 +15,8 @@ import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 
+import 'package:hive_flutter/hive_flutter.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GoRouter.optionURLReflectsImperativeAPIs = true;
@@ -22,6 +24,7 @@ void main() async {
   await initFirebase();
 
   await FlutterFlowTheme.initialize();
+  await Hive.initFlutter();
 
   final appState = FFAppState(); // Initialize FFAppState
   await appState.initializePersistedState();

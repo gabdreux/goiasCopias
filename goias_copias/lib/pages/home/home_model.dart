@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/components/drawer_widget.dart';
 import '/components/footer_widget.dart';
 import '/components/header_line_widget.dart';
@@ -9,6 +8,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'home_widget.dart' show HomeWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
@@ -23,6 +24,10 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   late DrawerModel drawerModel;
   // Model for Header_Line component.
   late HeaderLineModel headerLineModel;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
   // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
   ProdutosRecord? impressaoRetornoHome;
   // Stores action output result for [Firestore Query - Query a collection] action in Button widget.

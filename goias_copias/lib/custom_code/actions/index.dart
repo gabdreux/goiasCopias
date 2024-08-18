@@ -8,3 +8,4 @@ export 'fetch_file.dart' show fetchFile;
 export 'base_to_byte.dart' show baseToByte;
 export 'card_token.dart' show cardToken;
 export 'create_new_user.dart' show createNewUser;
+export 'saveOnCache.dart' show saveOnCache;
