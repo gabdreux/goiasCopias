@@ -49,6 +49,7 @@ class _PdfUploaderState extends State<PdfUploader> {
   Future<void> _initializeHive() async {
     // Abre a caixa do Hive para PDFs
     await Hive.openBox<Uint8List>('PDFsCache');
+    await Hive.openBox<Uint8List>('carrinhocache');
   }
 
   Future<void> _selectFile() async {

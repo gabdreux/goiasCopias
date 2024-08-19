@@ -13,23 +13,40 @@ import 'package:hive/hive.dart';
 import 'dart:typed_data';
 
 Future addBytesToCart() async {
-  // Abre a caixa Hive para PDFs em cache
-  var pdfBox = await Hive.openBox<Uint8List>('pdfscache');
+  Box<Uint8List>? pdfBox;
+  Box<Uint8List>? cartBox;
 
-  // Abre a caixa Hive para o carrinho de cache
-  var cartBox = await Hive.openBox<Uint8List>('carrinhocache');
+  try {
+    // Abre as caixas Hive para PDFs em cache e carrinho de cache
+    pdfBox = await Hive.openBox<Uint8List>('pdfscache');
+    cartBox = await Hive.openBox<Uint8List>('carrinhocache');
 
-  // Recupera todas as chaves (nomes dos arquivos) armazenadas na caixa pdfscache
-  List<String> pdfKeys = pdfBox.keys.cast<String>().toList();
+    // Recupera todas as chaves (nomes dos arquivos) e bytes armazenados na caixa pdfscache
+    final pdfKeys = pdfBox.keys.cast<String>().toList();
+    final Map<String, Uint8List> pdfMap = {};
 
-  for (String key in pdfKeys) {
-    // Recupera os bytes do PDF armazenado no pdfscache
-    Uint8List? bytes = pdfBox.get(key);
+    for (String key in pdfKeys) {
+      final bytes = pdfBox.get(key);
+      if (bytes != null) {
+        pdfMap[key] = bytes;
+      }
+    }
 
-    if (bytes != null) {
-      // Adiciona os bytes do PDF à caixa carrinhocache
-      // Se o arquivo já existir no carrinhocache, ele será sobrescrito
-      await cartBox.put(key, bytes);
+    // Adiciona todos os bytes do PDF à caixa carrinhocache de uma vez
+    await cartBox.putAll(pdfMap);
+  } catch (e) {
+    print('Erro ao adicionar bytes ao carrinho: $e');
+  } finally {
+    // Fechar as caixas após o uso
+    try {
+      if (pdfBox != null && Hive.isBoxOpen('pdfscache')) {
+        await pdfBox.close();
+      }
+      if (cartBox != null && Hive.isBoxOpen('carrinhocache')) {
+        await cartBox.close();
+      }
+    } catch (e) {
+      print('Erro ao fechar as caixas: $e');
     }
   }
 }

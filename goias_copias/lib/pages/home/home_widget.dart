@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/components/drawer_widget.dart';
 import '/components/footer_widget.dart';
 import '/components/header_line_widget.dart';
@@ -8,14 +9,11 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
-import '/custom_code/actions/index.dart' as actions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'home_model.dart';
 export 'home_model.dart';
 
@@ -604,45 +602,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     focusColor: Colors.transparent,
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      final selectedFiles = await selectFiles(
-                                        allowedExtensions: ['pdf'],
-                                        multiFile: false,
-                                      );
-                                      if (selectedFiles != null) {
-                                        setState(() =>
-                                            _model.isDataUploading = true);
-                                        var selectedUploadedFiles =
-                                            <FFUploadedFile>[];
-
-                                        try {
-                                          selectedUploadedFiles = selectedFiles
-                                              .map((m) => FFUploadedFile(
-                                                    name: m.storagePath
-                                                        .split('/')
-                                                        .last,
-                                                    bytes: m.bytes,
-                                                  ))
-                                              .toList();
-                                        } finally {
-                                          _model.isDataUploading = false;
-                                        }
-                                        if (selectedUploadedFiles.length ==
-                                            selectedFiles.length) {
-                                          setState(() {
-                                            _model.uploadedLocalFile =
-                                                selectedUploadedFiles.first;
-                                          });
-                                        } else {
-                                          setState(() {});
-                                          return;
-                                        }
-                                      }
-
-                                      await actions.saveOnCache(
-                                        _model.uploadedLocalFile,
-                                      );
-                                    },
+                                    // onTap: () async {
+                                    //   FFAppState().CarrinhoState =
+                                    //       CarrinhoStruct();
+                                    //   setState(() {});
+                                    // },
                                     child: Text(
                                       'IMPRESSÃO DE APOSTILAS ONLINE',
                                       textAlign: TextAlign.center,
@@ -734,7 +698,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   'assets/images/steptodown.com762907.jpg',
                                                   width: 320.0,
                                                   height: 200.0,
-                                                  fit: BoxFit.none,
+                                                  fit: BoxFit.cover,
                                                   alignment:
                                                       Alignment(1.0, 0.4),
                                                 ),

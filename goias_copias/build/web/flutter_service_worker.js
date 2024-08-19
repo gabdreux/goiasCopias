@@ -30,7 +30,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "c7b3b7a943b1fcbefec8169be654c105
 "assets/assets/videos/favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "assets/FontManifest.json": "5a32d4310a6f5d9a6b651e75ba0d7372",
 "assets/fonts/MaterialIcons-Regular.otf": "28f12a05cb3d14c8ba08c91ffad39180",
-"assets/NOTICES": "a1d3101a7c4b365ca0f14ef31756a2cb",
+"assets/NOTICES": "9c54c346fecdb8b3f89c58efe66855c3",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "391ff5f9f24097f4f6e4406690a06243",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "d4b9f7d055498eb704866ce8ce36e717",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf": "81b7016d9ce781d9178e58454b85da42",
@@ -50,12 +50,12 @@ const RESOURCES = {"assets/AssetManifest.bin": "c7b3b7a943b1fcbefec8169be654c105
 "Captura_de_tela_2024-07-18_161031.png": "2ce1b8b0986945244415b0115fcfd067",
 "favicon.png": "2704101cb06ce66e2000356a312be25c",
 "flutter.js": "f31737fb005cd3a3c6bd9355efd33061",
-"flutter_bootstrap.js": "9bc932c2013a86c1d122a09c95fba464",
+"flutter_bootstrap.js": "f4ec46ede5d9890c75ae34483c4abd5a",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "555fabb57c646414611151725924c4a6",
-"/": "555fabb57c646414611151725924c4a6",
-"main.dart.js": "c1b3113db1c9d3d857ddace752c0dd0b",
+"index.html": "1e3cadeffbcd1fdeb8e68ccbc78fa10e",
+"/": "1e3cadeffbcd1fdeb8e68ccbc78fa10e",
+"main.dart.js": "4c3b9094e4f95f7d50124f5385118337",
 "version.json": "7dd8fd488bdbbc4f18b3fecee45109ad"};
 // The application shell files that are downloaded before a service worker can
 // start.
